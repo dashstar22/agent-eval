@@ -1,0 +1,22 @@
+{
+  "original_package": "java_ai/validation/product-portfolio-holdout/frozen-v1",
+  "original_package_files": {
+    "freeze.json": "ae8a9b2913aff55dd2838ee1c7b39bde7e937577c1ce8da8d6da624894910a1e",
+    "LICENSE.txt": "8a2126e60a56a48f2e905013d9507c7a5fa823c80d7c484127f45b620c7efbcf",
+    "PRINT-HOLDOUT-02.md": "9f97e88d24fde678f2c4fe9f844af1084fa94d5dbe4acbd96d9464abd1a5bca0",
+    "questions.json": "a11c1722e2f4c8f7d60dfe978809e9bfac3cbc92cd807e5485cf5de6d0cd0e4f"
+  },
+  "copied_sources": {
+    "LICENSE.txt": "8a2126e60a56a48f2e905013d9507c7a5fa823c80d7c484127f45b620c7efbcf",
+    "PRINT-DEMO-01.md": "0946403e29306d5623cb2658a063b153d54e8bf96001d786983ae3162ccddf99",
+    "PRINT-HOLDOUT-02.md": "9f97e88d24fde678f2c4fe9f844af1084fa94d5dbe4acbd96d9464abd1a5bca0",
+    "questions.json": "a11c1722e2f4c8f7d60dfe978809e9bfac3cbc92cd807e5485cf5de6d0cd0e4f"
+  },
+  "original_demo_manual": {
+    "path": "java_ai/samples/portfolio/PRINT-DEMO-01.md",
+    "sha256": "0946403e29306d5623cb2658a063b153d54e8bf96001d786983ae3162ccddf99"
+  },
+  "original_authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+  "reuse_status": "SEEN_REGRESSION_NOT_UNSEEN_HOLDOUT",
+  "note": "原冻结包仅只读；副本与扩展使用新数据集身份。freeze.json仅记录哈希，不复制其历史验收声明。"
+}

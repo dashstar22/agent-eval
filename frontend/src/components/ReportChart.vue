@@ -1,0 +1,20 @@
+<script setup lang="ts">
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import * as echarts from 'echarts/core'
+import { BarChart } from 'echarts/charts'
+import { GridComponent, TooltipComponent, LegendComponent, AriaComponent } from 'echarts/components'
+import { CanvasRenderer } from 'echarts/renderers'
+import type { ReportChart } from '../types'
+import { categoryNames, metricNames, number } from '../workbench'
+echarts.use([BarChart, GridComponent, TooltipComponent, LegendComponent, AriaComponent, CanvasRenderer])
+const props = defineProps<{ chart: ReportChart; comparison?: boolean; paired?: boolean }>(), router = useRouter(), element = ref<HTMLDivElement>()
+let instance: echarts.ECharts | undefined, observer: ResizeObserver | undefined
+const label = (key: string) => metricNames[key] || categoryNames[key] || key
+const hasValues = computed(() => props.chart.available && props.chart.data.some(row => row.value !== null || (props.comparison && (row.left_value != null || row.right_value != null))))
+async function render() { await nextTick(); instance?.dispose(); instance = undefined; if (!element.value || !hasValues.value) return; instance = echarts.init(element.value); const rows = props.chart.data; instance.setOption({ animation: !window.matchMedia('(prefers-reduced-motion: reduce)').matches, color: ['#3d73b4', '#c48b42'], aria: { enabled: true }, tooltip: { trigger: 'axis', renderMode: 'richText' }, legend: { show: props.comparison, bottom: 0, textStyle: { color: '#708198', fontSize: 11 } }, grid: { top: 24, left: 48, right: 20, bottom: props.comparison ? 72 : 54 }, xAxis: { type: 'category', data: rows.map(row => label(row.name)), axisLabel: { fontSize: 10, interval: 0, rotate: rows.length > 4 ? 16 : 0, color: '#708198' }, axisLine: { lineStyle: { color: '#dce4ee' } }, axisTick: { show: false } }, yAxis: { type: 'value', axisLabel: { color: '#8090a4', fontSize: 10 }, splitLine: { lineStyle: { color: '#edf1f6' } } }, series: props.comparison ? [{ name: props.paired === false ? '左侧有效样本（口径受限）' : '左侧共同样本', type: 'bar', data: rows.map(row => row.left_value ?? null), barMaxWidth: 26 }, { name: props.paired === false ? '右侧有效样本（口径受限）' : '右侧共同样本', type: 'bar', data: rows.map(row => row.right_value ?? null), barMaxWidth: 26 }] : [{ name: props.chart.title, type: 'bar', data: rows.map(row => row.value), barMaxWidth: 42 }] }); instance.on('click', event => { const row = rows[event.dataIndex]; if (!row) return; const link = props.comparison && event.seriesIndex === 1 ? row.right_link : row.link; const ids = props.comparison && event.seriesIndex === 1 ? row.right_case_run_ids : row.case_run_ids; if (link && ids?.length) void router.push(link) }) }
+watch(() => props.chart, render, { deep: true })
+onMounted(() => { void render(); observer = new ResizeObserver(() => instance?.resize()); if (element.value) observer.observe(element.value) })
+onBeforeUnmount(() => { observer?.disconnect(); instance?.dispose() })
+</script>
+<template><section class="panel chart-panel"><div class="panel-heading"><h2>{{ chart.title }}</h2><span class="small muted">点击数据查看参与用例</span></div><div v-if="!hasValues" class="chart-empty"><span class="empty-mark">▥</span><p>当前没有可绘制的有效样本</p><small>{{ chart.reason || '样本为空或指标不可用，不以零分替代。' }}</small></div><div v-show="hasValues" ref="element" class="report-chart" :aria-label="chart.title" role="img" /><div v-if="chart.data.length" class="chart-drill"><div v-for="(row, index) in chart.data" :key="index"><RouterLink v-if="row.case_run_ids.length" class="text-link" :to="row.link">{{ label(row.name) }}{{ comparison ? ' · 左' : '' }}</RouterLink><RouterLink v-if="comparison && row.right_link && row.right_case_run_ids?.length" class="text-link" :to="row.right_link">右侧样本</RouterLink><span v-if="!row.case_run_ids.length">{{ label(row.name) }}</span><span v-if="comparison">{{ number(row.left_value) }} / {{ number(row.right_value) }}</span><span v-else>{{ number(row.value) }}</span><small>{{ row.paired_count !== undefined ? `共同 ${row.paired_count} 对` : `${row.case_run_ids.length} 条用例` }}</small></div></div></section></template>

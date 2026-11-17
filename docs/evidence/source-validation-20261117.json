@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-17",
+  "scope": "Curated public source tree; no external model calls",
+  "backend": {
+    "command": "uv run --locked pytest",
+    "working_directory": "backend",
+    "passed": 285,
+    "skipped": 1,
+    "skip_reason": "Optional byte comparison with the original synthetic package in a separate repository; local source-copy integrity checks passed",
+    "warnings": ["Starlette TestClient deprecation warning for httpx"]
+  },
+  "frontend": {
+    "commands": ["npm ci --ignore-scripts", "npm run build"],
+    "working_directory": "frontend",
+    "typecheck": "PASS",
+    "build": "PASS",
+    "warnings": ["ReportsView chunk is 517.59 kB, above the 500 kB warning threshold"]
+  },
+  "startup": {
+    "database": "New isolated MySQL container and dedicated schema",
+    "migration": "PASS",
+    "seed": {"first": "CREATED", "second": "ALREADY_PRESENT", "enabled_cases": 30},
+    "single_process_uvicorn": "PASS",
+    "execution_available": true,
+    "readonly_http_checks": 10,
+    "readonly_http_checks_passed": 10,
+    "started_process_and_container_stopped": true,
+    "database_preserved": true
+  },
+  "agent_calls": 0,
+  "judge_calls": 0,
+  "limitations": [
+    "Local tests use SQLite and explicit protocol doubles; MySQL startup is checked separately",
+    "The optional cross-repository original-package comparison was skipped",
+    "These checks do not constitute a new real-model evaluation"
+  ]
+}

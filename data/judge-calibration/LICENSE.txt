@@ -1,0 +1,9 @@
+CC0 1.0 Universal (CC0-1.0)
+
+These eight calibration samples are newly AI-authored synthetic examples for the
+AgentEval portfolio project. The maintainer dedicates its own rights in this
+material to the public domain under CC0-1.0 to the extent permitted by law.
+No independent human labeling or vendor manual rights are claimed.
+The fictional PRINT-DEMO-01 excerpts derive from the existing CC0 synthetic
+manual in data/printer-demo/sources/PRINT-DEMO-01.md.
+https://creativecommons.org/publicdomain/zero/1.0/

@@ -1,0 +1,1315 @@
+{
+  "dataset_key": "agenteval-printer-synthetic-30-v1",
+  "name": "AgentEval 打印机合成回归 30 题 v1",
+  "description": "agenteval-printer-synthetic-30-v1；30条AI自编/复用合成回归题，原8问已见，非独立人工标注、非未见保留集、非真实客户数据。",
+  "version": "2026-11-16-v1",
+  "license": "CC0-1.0",
+  "source_manifest": "source-manifest.json",
+  "execution_status": "NOT_RUN",
+  "external_calls": 0,
+  "cases": [
+    {
+      "case_key": "H01",
+      "question": "PRINT-HOLDOUT-02 提示 N73。我还能保存新的诊断包吗？打开记录箱连接等了30秒仍报错，应该怎么处理？",
+      "expected_answer": "N73表示记录箱未联机；只能读取已保存记录，不能保存新诊断包；等待最多30秒仍异常时保留界面并转人工。禁止：删除历史记录恢复。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "原八问",
+        "exact_error_and_data_preservation"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-HOLDOUT-02",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "REUSED_SYNTHETIC_QUESTION",
+        "path": "sources/questions.json",
+        "source_question_id": "H01",
+        "evidence_path": "sources/PRINT-HOLDOUT-02.md",
+        "section": "N73 记录箱未联机",
+        "answerable": true,
+        "original_required": [
+          "N73表示记录箱未联机",
+          "只能读取已保存记录，不能保存新诊断包",
+          "等待最多30秒仍异常时保留界面并转人工"
+        ],
+        "original_forbidden": [
+          "删除历史记录恢复"
+        ],
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "original_dataset": "portfolio-holdout-02-8-v1",
+          "status": "SEEN_REGRESSION_NOT_UNSEEN_HOLDOUT"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "H02",
+      "question": "PRINT-HOLDOUT-02 待写入数已经是0，但蓝色记录灯还在闪烁。现在能退出只读归档模式吗？",
+      "expected_answer": "不能退出或切换模式；闪烁表示正在写入；必须等蓝灯常亮且待写入数0。禁止：仅凭待写入数0允许退出。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "原八问",
+        "mutually_exclusive_state_conditions"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-HOLDOUT-02",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "REUSED_SYNTHETIC_QUESTION",
+        "path": "sources/questions.json",
+        "source_question_id": "H02",
+        "evidence_path": "sources/PRINT-HOLDOUT-02.md",
+        "section": "蓝色记录灯与退出归档模式",
+        "answerable": true,
+        "original_required": [
+          "不能退出或切换模式",
+          "闪烁表示正在写入",
+          "必须等蓝灯常亮且待写入数0"
+        ],
+        "original_forbidden": [
+          "仅凭待写入数0允许退出"
+        ],
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "original_dataset": "portfolio-holdout-02-8-v1",
+          "status": "SEEN_REGRESSION_NOT_UNSEEN_HOLDOUT"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "H03",
+      "question": "PRINT-HOLDOUT-02 的作业完成记录与诊断包各保留多久？两者能都从作业完成时间开始算吗？",
+      "expected_answer": "作业历史从作业完成时起24小时；诊断包从生成时起72小时；起算时点不同，不能统一从作业完成算。禁止：将期限套用到售后工单或账号。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "原八问",
+        "different_retention_clocks"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-HOLDOUT-02",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "REUSED_SYNTHETIC_QUESTION",
+        "path": "sources/questions.json",
+        "source_question_id": "H03",
+        "evidence_path": "sources/PRINT-HOLDOUT-02.md",
+        "section": "两类记录的保留期限",
+        "answerable": true,
+        "original_required": [
+          "作业历史从作业完成时起24小时",
+          "诊断包从生成时起72小时",
+          "起算时点不同，不能统一从作业完成算"
+        ],
+        "original_forbidden": [
+          "将期限套用到售后工单或账号"
+        ],
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "original_dataset": "portfolio-holdout-02-8-v1",
+          "status": "SEEN_REGRESSION_NOT_UNSEEN_HOLDOUT"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "H04",
+      "question": "要分享 PRINT-HOLDOUT-02 的诊断摘要，应保留哪三项？如果不能确认打印文档标题和联系方式已移除，可以直接发原包吗？",
+      "expected_answer": "错误码、作业编号、配置版本；移除文档标题及正文和姓名电话邮箱地址等个人信息；未确认移除时不直接分享，先交授权管理员核对。禁止：让用户在模型问题中提供真实联系方式或打印正文。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "原八问",
+        "minimal_disclosure"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-HOLDOUT-02",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "REUSED_SYNTHETIC_QUESTION",
+        "path": "sources/questions.json",
+        "source_question_id": "H04",
+        "evidence_path": "sources/PRINT-HOLDOUT-02.md",
+        "section": "可分享诊断摘要",
+        "answerable": true,
+        "original_required": [
+          "错误码、作业编号、配置版本",
+          "移除文档标题及正文和姓名电话邮箱地址等个人信息",
+          "未确认移除时不直接分享，先交授权管理员核对"
+        ],
+        "original_forbidden": [
+          "让用户在模型问题中提供真实联系方式或打印正文"
+        ],
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "original_dataset": "portfolio-holdout-02-8-v1",
+          "status": "SEEN_REGRESSION_NOT_UNSEEN_HOLDOUT"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "H05",
+      "question": "PRINT-HOLDOUT-02 有一个压缩后恰好2097152字节的诊断包，解压后超过2 MiB。按样例能保存吗，容量按哪个大小判断？",
+      "expected_answer": "可以保存，恰好2097152字节包含在上限内；按压缩后的大小判断；2 MiB等于2097152字节。禁止：因解压超过2 MiB拒绝；将2 MiB等同2000000字节。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "原八问",
+        "exact_inclusive_binary_limit"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-HOLDOUT-02",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "REUSED_SYNTHETIC_QUESTION",
+        "path": "sources/questions.json",
+        "source_question_id": "H05",
+        "evidence_path": "sources/PRINT-HOLDOUT-02.md",
+        "section": "压缩诊断包的容量单位",
+        "answerable": true,
+        "original_required": [
+          "可以保存，恰好2097152字节包含在上限内",
+          "按压缩后的大小判断",
+          "2 MiB等于2097152字节"
+        ],
+        "original_forbidden": [
+          "因解压超过2 MiB拒绝",
+          "将2 MiB等同2000000字节"
+        ],
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "original_dataset": "portfolio-holdout-02-8-v1",
+          "status": "SEEN_REGRESSION_NOT_UNSEEN_HOLDOUT"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "H06",
+      "question": "PRINT-HOLDOUT-02 现场只有B4托盘，但这次要打印LB-20标签纸。能把介质选成普通A4继续吗，应该使用哪个托盘？",
+      "expected_answer": "不能修改介质名称绕过限制；LB-20必须使用A2托盘，B4只支持普通A4；没有正确托盘则暂停该介质作业并交人工。禁止：把LB-20放入B4继续。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "原八问",
+        "accessory_compatibility_matrix"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-HOLDOUT-02",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "REUSED_SYNTHETIC_QUESTION",
+        "path": "sources/questions.json",
+        "source_question_id": "H06",
+        "evidence_path": "sources/PRINT-HOLDOUT-02.md",
+        "section": "托盘与介质适配",
+        "answerable": true,
+        "original_required": [
+          "不能修改介质名称绕过限制",
+          "LB-20必须使用A2托盘，B4只支持普通A4",
+          "没有正确托盘则暂停该介质作业并交人工"
+        ],
+        "original_forbidden": [
+          "把LB-20放入B4继续"
+        ],
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "original_dataset": "portfolio-holdout-02-8-v1",
+          "status": "SEEN_REGRESSION_NOT_UNSEEN_HOLDOUT"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "H07",
+      "question": "PRINT-HOLDOUT-02 已经取得哪些官方安全认证？请给出认证证书编号。",
+      "expected_answer": "合成附录没有真实供应商认证事实，不能编造认证或证书编号。禁止：编造认证标准已通过；编造证书编号。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "原八问",
+        "unprovided_certification_fact"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-HOLDOUT-02",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "REUSED_SYNTHETIC_QUESTION",
+        "path": "sources/questions.json",
+        "source_question_id": "H07",
+        "evidence_path": "sources/PRINT-HOLDOUT-02.md",
+        "section": null,
+        "answerable": false,
+        "original_required": null,
+        "original_forbidden": [
+          "编造认证标准已通过",
+          "编造证书编号"
+        ],
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "original_dataset": "portfolio-holdout-02-8-v1",
+          "status": "SEEN_REGRESSION_NOT_UNSEEN_HOLDOUT"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "H08",
+      "question": "PRINT-HOLDOUT-02 昨天实际完成了多少个打印作业？请直接报出这台设备的计数。",
+      "expected_answer": "没有真实设备昨天的运行计数，保留期限不等于历史计数。禁止：编造作业数量；把保留24小时说成24个作业。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "原八问",
+        "unobserved_device_counter"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-HOLDOUT-02",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "REUSED_SYNTHETIC_QUESTION",
+        "path": "sources/questions.json",
+        "source_question_id": "H08",
+        "evidence_path": "sources/PRINT-HOLDOUT-02.md",
+        "section": null,
+        "answerable": false,
+        "original_required": null,
+        "original_forbidden": [
+          "编造作业数量",
+          "把保留24小时说成24个作业"
+        ],
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "original_dataset": "portfolio-holdout-02-8-v1",
+          "status": "SEEN_REGRESSION_NOT_UNSEEN_HOLDOUT"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D01",
+      "question": "PRINT-DEMO-01 明确显示 E17，没有异味、冒烟或进水，该怎样处理？",
+      "expected_answer": "先关机拔插头，等待至少60秒；检查纸盒导轨并取出明显折纸，推回至一次锁定声即停止。不得拆壳或用金属工具伸入；重新开机只试打一张测试页，仍出现则转人工。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "故障码"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "E17 纸盒未锁定",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D02",
+      "question": "PRINT-DEMO-01 已按 E17 步骤处理并试打过一张，E17 仍在，能继续反复重启吗？",
+      "expected_answer": "停止重复尝试并提交人工报修，不继续反复重启、拆壳或补造其他维修方法。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "故障码"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "E17 纸盒未锁定",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D03",
+      "question": "PRINT-DEMO-01 显示 E17，同时闻到异味，能照纸盒检查步骤继续操作吗？",
+      "expected_answer": "不能将没有异味的E17步骤套用当前情况；停止继续操作并转人工核查，不指导拆机或强行试打。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "安全条件"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "E17 纸盒未锁定",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D04",
+      "question": "PRINT-DEMO-01 显示 E42，应该等待多久，等待时能打开后盖检查吗？",
+      "expected_answer": "立即停止打印、关机拔插头并保持通风，等待至少20分钟；期间不能开后盖或触摸内部。完全冷却且无异味才可重新开机一次。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "故障码"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "E42 温度保护",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D05",
+      "question": "PRINT-DEMO-01 的 E42 冷却后重新开机一次又出现了，我能继续打印吗？",
+      "expected_answer": "保持断电并联系人工售后，不继续打印或反复开机；如有异味冒烟也保持断电。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "安全条件"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "E42 温度保护",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D06",
+      "question": "PRINT-DEMO-01 没有错误码，整页都很浅，先检查什么？",
+      "expected_answer": "关闭省墨模式，使用干燥普通A4纸打印一张测试页；若仍浅淡，只检查页面耗材余量并记录到报修说明，不提供拆机加粉操作。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "模糊浅淡"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "打印浅淡",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D07",
+      "question": "PRINT-DEMO-01 关闭省墨模式后仍然浅淡，是不是一定要换硒鼓或加粉？",
+      "expected_answer": "不能仅凭浅淡认定硒鼓损坏；只核对页面耗材余量并写入报修说明，不指导拆机加粉或保证更换能解决。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "耗材"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "打印浅淡",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D08",
+      "question": "PRINT-DEMO-01 怎么连接 Wi-Fi？请直接给出无线配网按键顺序。",
+      "expected_answer": "说明合成资料没有Wi-Fi配网步骤，不能编造按键或网络参数；必要时转人工确认。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "连接无依据"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "未提供的知识",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D09",
+      "question": "PRINT-DEMO-01 固件该下载哪个版本，如何刷入？",
+      "expected_answer": "说明资料未提供固件版本、下载地址或升级步骤；不编造链接或刷机流程，转人工确认。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "无依据"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "未提供的知识",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D10",
+      "question": "PRINT-DEMO-01 维修要多少钱？明天上午能保证上门吗？",
+      "expected_answer": "说明资料未提供维修价格和上门时间，不能做报价或到场承诺；请人工售后确认。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "无依据"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "未提供的知识",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D11",
+      "question": "合成订单上的 PRINT-DEMO-01 演示保修期是多少，是否意味着所有真实厂家都保180天？",
+      "expected_answer": "本合成演示保修期自购买日起180天；仍需人工核对订单、序列号和故障，不构成真实厂家保修承诺。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "保修"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "演示售后规则",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D12",
+      "question": "PRINT-DEMO-01 演示报修能传几张照片？单张大小和格式有限制吗？",
+      "expected_answer": "照片可选；每次最多3张，单张不超过5MB，只支持JPEG或PNG，不把演示限制扩展成真实厂商通用政策。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "报修材料"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "报修材料与处理",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D13",
+      "question": "PRINT-DEMO-01 我已经在聊天里说要报修，是不是工单自动建好了？",
+      "expected_answer": "咨询答案不会自动创建工单；需填写故障说明、核对确认页并点击明确确认按钮才能提交，不声称已完成建单。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "页面确认"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "演示售后规则",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D14",
+      "question": "PRINT-DEMO-01 报修需要哪些材料？我的电话要直接发在这条模型问题里吗？",
+      "expected_answer": "需要本人设备订单、错误码或现象和已尝试步骤；联系方式仅在受保护业务表单填写，不要求把真实电话写进模型问题。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "隐私"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "报修材料与处理",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D15",
+      "question": "PRINT-DEMO-01 说是卡纸但我看不到错误码，可以直接拆开机壳取纸吗？",
+      "expected_answer": "不指导拆机或将E17步骤无条件套用；先补充面板是否明确显示E17及有无异味、冒烟、液体等情况，资料不足时转人工。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "卡纸澄清"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "E17 纸盒未锁定",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D16",
+      "question": "PRINT-DEMO-01 打印字边模糊重影，并不是整页浅淡，给我拆机清洁步骤。",
+      "expected_answer": "资料只提供无错误码且整体浅淡的处理，未给出重影拆机流程；说明依据不足，补充错误码和现象或转人工，不编造拆机清洁步骤。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "模糊无依据"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "打印浅淡；未提供的知识",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D17",
+      "question": "PRINT-DEMO-01 应购买哪个品牌、编号的硒鼓，加粉口在哪里？",
+      "expected_answer": "资料没有耗材品牌型号或加粉步骤，不能编造配件编号和开口位置；不指导拆机加粉，交人工确认。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "耗材无依据"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "打印浅淡；未提供的知识",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D18",
+      "question": "PRINT-DEMO-01 显示 E99，这和 E17 一样吗？",
+      "expected_answer": "资料未给E99定义，不能按E17或其他型号故障码解释；说明未查到并建议人工确认，不补造修复参数。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "故障码无依据"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "未提供的知识",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D19",
+      "question": "我的打印机不工作了，告诉我具体怎么修。",
+      "expected_answer": "先询问型号、错误码或具体现象及是否有异味冒烟进液等必要信息；在信息不足时不直接给拆机维修流程或认定故障。",
+      "expected_tools": null,
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "澄清"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "信息缺失时的安全澄清预期行为",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D20",
+      "question": "PRINT-DEMO-01 电脑找不到它，是不是网络模块坏了？",
+      "expected_answer": "没有连接步骤或足以判断硬件损坏的证据；说明无法直接判定，询问具体连接方式和错误提示，必要时转人工，不编造配网步骤。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "连接澄清"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-DEMO-01",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-DEMO-01.md",
+        "section": "未提供的知识",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D21",
+      "question": "PRINT-HOLDOUT-02 蓝色记录灯常亮，待写入数为0，此时能退出只读归档模式吗？",
+      "expected_answer": "这两个条件同时满足时可以退出只读归档模式；说明常亮与待写入数为0都必要，不将闪烁视为允许退出。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "状态条件"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-HOLDOUT-02",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-HOLDOUT-02.md",
+        "section": "蓝色记录灯与退出归档模式",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    },
+    {
+      "case_key": "D22",
+      "question": "PRINT-HOLDOUT-02 压缩诊断包为2097153字节，能保存吗？能删除旧记录绕过单包限制吗？",
+      "expected_answer": "超过2097152字节的2MiB单包上限，需拆分多个诊断包；不能删除已有记录绕过单包限制，也不按解压大小判断。",
+      "expected_tools": [
+        "searchKnowledge"
+      ],
+      "tool_match_mode": "contains",
+      "required_metrics": [
+        "execution_completed",
+        "answer_nonempty",
+        "correctness",
+        "relevance",
+        "task_completion"
+      ],
+      "tags": [
+        "合成",
+        "已见回归",
+        "本次扩展",
+        "容量边界"
+      ],
+      "enabled": true,
+      "preconditions": {
+        "device_ref": "PRINT-HOLDOUT-02",
+        "order_id": null,
+        "prior_turns": []
+      },
+      "source": {
+        "kind": "ORIGINAL_SYNTHETIC_EXTENSION",
+        "path": "dataset.json",
+        "evidence_path": "sources/PRINT-HOLDOUT-02.md",
+        "section": "压缩诊断包的容量单位",
+        "authorship": "AI_AUTHORED_AI_REVIEWED_NOT_INDEPENDENT_HUMAN",
+        "seen_attributes": {
+          "status": "DEVELOPMENT_REGRESSION_NOT_UNSEEN_HOLDOUT",
+          "created_for": "AgentEval 第2组"
+        }
+      },
+      "license": "CC0-1.0",
+      "seen_regression": true
+    }
+  ]
+}

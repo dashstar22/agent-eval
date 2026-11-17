@@ -1,0 +1,15 @@
+CC0 1.0 Universal
+
+To the extent possible under law, the authors waive copyright and related
+rights in dataset.json and the original synthetic extensions in this folder.
+https://creativecommons.org/publicdomain/zero/1.0/
+
+The reused questions and synthetic manuals retain their original CC0-1.0
+dedications. See sources/LICENSE.txt, the inline dedication in
+sources/PRINT-DEMO-01.md, and source-manifest.json.
+
+These materials are AI-authored and AI-reviewed portfolio demonstration
+material. They are not independent human annotations, an unseen holdout,
+vendor manuals, actual equipment instructions, or real customer data.
+This dedication does not cover third-party dependencies or other repository
+files whose rights are not held by these authors.

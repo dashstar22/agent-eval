@@ -1,0 +1,7 @@
+<script setup lang="ts">
+import type { ApiProblem } from '../types'
+defineProps<{ error: ApiProblem | null }>()
+const names: Record<string, string> = { name: '名称', question: '问题', expected_answer: '参考行为', case_key: '稳定用例标识', expected_tools: '预期工具', tool_match_mode: '匹配方式', required_metrics: '必评指标', tags: '标签', base_url: '连接地址', timeout_ms: '请求超时', adapter_type: '连接协议', credential_refs: '凭证引用', username_ref: '账号环境引用', password_ref: '密码环境引用', bearer_ref: 'Bearer 环境引用', expected_version: '预期版本', source_type: '数据来源', preconditions: '前置条件', source: '来源说明', license: '许可', prior_turns: '前置轮次', order_id: '设备订单 ID', device_ref: '设备引用' }
+function label(field: string) { return field.replace(/^body\./, '').split('.').map(part => names[part] || part).join(' / ') }
+</script>
+<template><div v-if="error" class="problem-box" role="alert"><strong>{{ error.message }}</strong><ul v-if="error.fields.length"><li v-for="(item, index) in error.fields" :key="index">{{ label(item.field) }}：{{ item.message || item.code }} <span v-if="item.code" class="mono">({{ item.code }})</span> <RouterLink v-if="item.value && item.field === 'active_run_id'" class="text-link" :to="{ path: '/experiments', query: { run: item.value } }">查看活动运行 {{ item.value }}</RouterLink><RouterLink v-else-if="item.value && item.field === 'active_score_set_id'" class="text-link" :to="{ path: '/experiments', query: { score_set: item.value } }">查看活动重评分 {{ item.value }}</RouterLink></li></ul><small>{{ error.code }}<template v-if="error.trace_id"> · 追踪编号 {{ error.trace_id }}</template></small></div></template>

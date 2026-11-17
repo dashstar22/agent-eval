@@ -1,0 +1,48 @@
+{
+  "recorded_at": "2026-11-16T08:36:49.3916612Z",
+  "scope": "CURRENT_BUILD_NO_MODEL_CALLS",
+  "tools": {
+    "uv": "0.11.16",
+    "npm": "11.12.1",
+    "node": "24.15.0"
+  },
+  "checks": [
+    {
+      "status": "PASS",
+      "directory": "backend",
+      "result": "Resolved 33 packages in 3ms",
+      "command": "uv lock --check"
+    },
+    {
+      "status": "PASS",
+      "warnings": [
+        "ReportsView chunk 517.59 kB exceeds 500 kB warning threshold; build is successful"
+      ],
+      "directory": "frontend",
+      "result": "vue-tsc --noEmit and Vite build succeeded; 2274 modules transformed",
+      "command": "npm run build"
+    },
+    {
+      "status": "FAIL",
+      "directory": "backend",
+      "result": "uv 0.11.16 build does not accept --locked; failed before build",
+      "command": "uv build --locked --out-dir ../.local-validation/group7-delivery-build"
+    },
+    {
+      "status": "PASS",
+      "directory": "backend",
+      "result": "Built sdist and wheel from pinned hatchling build requirement using local cache; runtime lock separately checked",
+      "command": "uv build --offline --out-dir ../.local-validation/group7-delivery-build"
+    }
+  ],
+  "artifacts_sha256": {
+    ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+    "agenteval-0.1.0.tar.gz": "eb2bba3c89809f5659b459abd8189aa04f7a6c59a0cf4df3ea8135a24266c6c0",
+    "agenteval-0.1.0-py3-none-any.whl": "5e57927e3febf4769c1e23783e5168a8271f1f461c2cfdd6286fe5d0fa555132"
+  },
+  "unverified": [
+    "Build-backend transitive tools are not claimed as part of uv runtime lock",
+    "Build success does not prove real Agent or Judge execution",
+    "Author independent reproduction remains unverified"
+  ]
+}
