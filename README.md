@@ -38,22 +38,27 @@ AgentEval 是一个可在本机运行的 Agent 评测项目，将“准备测试
 
 ## 运行截图
 
-报告与 D11 详情来自 **2026-11-17 已保存的真实单配置补测**，使用包含质量工作台的当前界面展示：30 题中 **26 通过、4 失败、0 未判定**。质量工作台图片来自同日合成夹具的自动化界面验证，展示结构化复核与原 Judge 对照，不代表独立人工质量标注。点击图片可查看原图；截图来源与裁剪范围见[截图回执](docs/evidence/readme-screenshots-20261117.json)。
+以下图片于 **2026-11-18** 从当前界面重新截取。报告与 D11 详情读取 **2026-11-17 已保存的真实单配置补测**：30 题中 **26 通过、4 失败、0 未判定**。质量工作台读取同日合成夹具的已保存复核与一致性记录，不代表独立人工质量标注。本次没有新增 Agent 或 Judge 调用，也没有提交新的人工复核。
+
+README 内展示页面顶部的缩小预览；**点击预览图或下方文字链接，可查看从页头到页脚的完整长图**。三张完整图均核对了顶部、底部、表格所有列与末行；原始 JSON 仍保持折叠。截图范围、尺寸与文件哈希见[完整长图回执](docs/evidence/readme-fullpages-20261118.json)。
 
 <p align="center">
-  <a href="docs/images/real-e2e-report-20261117.png"><img src="docs/images/real-e2e-report-20261117.png" width="960" alt="11月17日真实单配置补测报告：30题、26通过、4失败、0未判定，有效通过率86.7%，保留INCOMPLETE版本核验提示及质量工作台入口" /></a>
+  <a href="docs/images/real-e2e-report-full-20261118.png"><img src="docs/images/real-e2e-report-preview-20261118.jpg" width="960" alt="真实补测报告顶部预览：26通过、4失败、0未判定；点击查看含图表、用量、完整版本表和页脚的长图" /></a>
   <br />
-  <sub>本轮真实补测报告 · 26 / 4 / 0；成功模型元数据覆盖 29/30，真实 Judge 评分 30/30</sub>
+  <sub>真实补测 · 26 / 4 / 0；成功模型元数据覆盖 29/30，真实 Judge 评分 30/30 · <a href="docs/images/real-e2e-report-full-20261118.png">查看完整报告长图（1800 × 3183）</a></sub>
 </p>
 
-<table>
-  <tr><th width="50%">D11：实际回答与失败理由（真实补测）</th><th width="50%">质量工作台：结构化复核与 Judge 对照</th></tr>
-  <tr>
-    <td><a href="docs/images/real-e2e-detail-20261117.png"><img src="docs/images/real-e2e-detail-20261117.png" width="100%" alt="本轮D11失败详情：正确性2分、依据充分性1分、相关性3分、任务完成度2分，保留实际回答和冻结参考行为" /></a></td>
-    <td><a href="docs/images/quality-workbench-20261117.png"><img src="docs/images/quality-workbench-20261117.png" width="100%" alt="质量工作台合成界面验证：保存结构化复核，保留原Judge评分和历史；画面明确标注自动化界面验证而非真实人工质量评审" /></a></td>
-  </tr>
-  <tr><td align="center">已检索到演示保修期仍未回答，实际失败与 Judge 理由完整保留</td><td align="center">合成夹具验证复核流程；人工记录与原 Judge 分别保存</td></tr>
-</table>
+<p align="center">
+  <a href="docs/images/real-e2e-detail-full-20261118.png"><img src="docs/images/real-e2e-detail-preview-20261118.jpg" width="960" alt="D11失败详情顶部预览：实际回答、冻结参考行为与失败理由；点击查看全部10行指标、工具轨迹、4行版本表和页脚" /></a>
+  <br />
+  <sub>D11 · 已检索到演示保修期仍未回答；原 Judge 分数为 2 / 1 / 3 / 2 · <a href="docs/images/real-e2e-detail-full-20261118.png">查看完整详情长图（1800 × 5423）</a></sub>
+</p>
+
+<p align="center">
+  <a href="docs/images/quality-workbench-full-20261118.png"><img src="docs/images/quality-workbench-preview-20261118.jpg" width="960" alt="质量工作台人工复核页顶部预览：页面标题、四个页签与Q02；点击查看完整表单、已保存夹具复核、一致性表及页脚" /></a>
+  <br />
+  <sub>质量工作台 · 合成夹具的已保存复核与一致性，记录标注 AUTOMATED_HTTP_FIXTURE · <a href="docs/images/quality-workbench-full-20261118.png">查看完整工作台长图（1800 × 2536）</a></sub>
+</p>
 
 <details>
   <summary>查看历史 A/B 配置比较与无模型请求分支</summary>

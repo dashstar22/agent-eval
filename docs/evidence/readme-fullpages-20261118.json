@@ -1,0 +1,682 @@
+{
+  "status": "PASS",
+  "scope": "README_SCREENSHOTS_ONLY_NO_MODEL_EXECUTION",
+  "generated_at": "2026-11-17T16:16:28.892258+00:00",
+  "ui_source_commit": "ab7592be5d1b9ad3ca9ca7a8a5549a12df6716ed",
+  "screenshot_date": "2026-11-18",
+  "timezone": "Asia/Shanghai",
+  "saved_result_date": "2026-11-17",
+  "real_result": {
+    "run_id": "39ff235d-d797-4025-879e-923ff045dd50",
+    "score_set_id": "075e48b3-b0d8-4ced-8ef1-92f3859f9ff9",
+    "case_run_id_d11": "db47b89b-166a-42c3-a1cb-e3b28aa146ba",
+    "N": 30,
+    "P": 26,
+    "F": 4,
+    "U": 0,
+    "failed_cases": [
+      "D11",
+      "H01",
+      "H02",
+      "H04"
+    ],
+    "aggregate_version_verification": "INCOMPLETE",
+    "supplier_immutable_model_snapshot": "UNKNOWN",
+    "saved_private_export_sha256": "d49474385a567b35bd37b83f78322769c3ebcd65c795afb1ae8c5281e1a95d89"
+  },
+  "quality_result": {
+    "run_id": "db7338f3-7268-4b2d-b901-b4ea12ecd07c",
+    "score_set_id": "16302c12-affd-470c-9559-41ec5ca8daa3",
+    "case_key": "Q02",
+    "case_run_id": "ddc95cd8-77dc-45c2-9fe3-18594625d927",
+    "tab": "reviews",
+    "source_type": "PROTOCOL_DOUBLE",
+    "saved_review_count": 1,
+    "reviewer_marker": "AUTOMATED_HTTP_FIXTURE",
+    "independent_human_quality_review": false,
+    "new_reviews_submitted": 0,
+    "judge_individual_reveal_table_displayed": false,
+    "displayed": "Entire reviews tab including unfilled form, saved automated fixture review, and all four consistency metric rows; other tabs are navigation entries only."
+  },
+  "capture_method": "Ego browser CDP Page.captureScreenshot with zoom-aware entire-document bounds; PNG written directly from browser bytes, without post-capture cropping, stitching, redrawing, or content edits.",
+  "pages": [
+    {
+      "name": "real-e2e-report",
+      "title": "评测报告",
+      "captured_at": "2026-11-17T16:10:53.679Z",
+      "scope": "ENTIRE_RENDERED_PAGE_FROM_HEADER_TO_FOOTER",
+      "source_type": "REAL_EXTERNAL_SAVED_RESULT",
+      "viewport_css": {
+        "width": 1800,
+        "height": 1100,
+        "dpr": 0.9999999966988184
+      },
+      "document_css": {
+        "width": 1781,
+        "height": 3183
+      },
+      "capture": {
+        "method": "Page.captureScreenshot",
+        "scope": "ENTIRE_DOCUMENT_FROM_ORIGIN",
+        "cssBounds": {
+          "x": 0,
+          "y": 0,
+          "width": 1800,
+          "height": 3183
+        },
+        "browserZoom": 0.800000011920929,
+        "clipDip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440.0000214576721,
+          "height": 2546.400037944317,
+          "scale": 1
+        },
+        "captureBeyondViewport": true,
+        "postCaptureCrop": false
+      },
+      "heading_bbox_css": {
+        "x": 249.989990234375,
+        "y": 91.9871826171875,
+        "width": 308.0028076171875,
+        "height": 39.20272445678711,
+        "right": 557.9927978515625,
+        "bottom": 131.1899070739746
+      },
+      "footer_bbox_css": {
+        "x": 217.99880981445312,
+        "y": 3126.802978515625,
+        "width": 1563.4014892578125,
+        "height": 56.00961685180664,
+        "right": 1781.4002990722656,
+        "bottom": 3182.8125953674316,
+        "text": "AgentEval\n已保存的变更将用于后续运行；历史冻结输入保持原样。"
+      },
+      "tables": [
+        {
+          "headers": [
+            "版本维度",
+            "预期",
+            "实际观测",
+            "核验与覆盖"
+          ],
+          "body_rows": 4,
+          "bbox_css": {
+            "x": 274.6294250488281,
+            "y": 2495.76318359375,
+            "width": 1450.1402587890625,
+            "height": 387.0292663574219,
+            "right": 1724.7696838378906,
+            "bottom": 2882.792449951172
+          },
+          "first_row_bbox_css": {
+            "x": 274.6294250488281,
+            "y": 2495.76318359375,
+            "width": 1450.1402587890625,
+            "height": 43.50961685180664,
+            "right": 1724.7696838378906,
+            "bottom": 2539.2728004455566
+          },
+          "last_row_bbox_css": {
+            "x": 274.6294250488281,
+            "y": 2795.903564453125,
+            "width": 1450.1402587890625,
+            "height": 86.88902282714844,
+            "right": 1724.7696838378906,
+            "bottom": 2882.7925872802734
+          },
+          "all_cells_inside_capture": true
+        }
+      ],
+      "details_state": [
+        {
+          "summary": "运行与证据 来源、版本、执行统计、模型用量与冻结条件",
+          "open": true
+        },
+        {
+          "summary": "查看来源计数与覆盖范围",
+          "open": false
+        },
+        {
+          "summary": "当前评分集与冻结条件",
+          "open": false
+        }
+      ],
+      "checks": {
+        "png_matches_capture_css_bounds": true,
+        "top_heading_complete": true,
+        "footer_complete": true,
+        "table_headers_all_columns_and_last_rows_complete": true,
+        "horizontal_table_overflow": false,
+        "page_horizontal_overflow": false,
+        "visible_api_errors": [],
+        "full_page_visual_review": "PASS",
+        "top_footer_table_pixel_review": "PASS"
+      },
+      "private_layout_sha256": "e4504c5d7ac20f6071bd2ea7c5eb2a0abdd8d9caf7aaf257d9f658c7b6f8cee1"
+    },
+    {
+      "name": "real-e2e-detail",
+      "title": "评测详情",
+      "captured_at": "2026-11-17T16:10:56.005Z",
+      "scope": "ENTIRE_RENDERED_PAGE_FROM_HEADER_TO_FOOTER",
+      "source_type": "REAL_EXTERNAL_SAVED_RESULT",
+      "viewport_css": {
+        "width": 1800,
+        "height": 1100,
+        "dpr": 0.9999999966988184
+      },
+      "document_css": {
+        "width": 1781,
+        "height": 5422
+      },
+      "capture": {
+        "method": "Page.captureScreenshot",
+        "scope": "ENTIRE_DOCUMENT_FROM_ORIGIN",
+        "cssBounds": {
+          "x": 0,
+          "y": 0,
+          "width": 1800,
+          "height": 5423
+        },
+        "browserZoom": 0.800000011920929,
+        "clipDip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440.0000214576721,
+          "height": 4338.400064647198,
+          "scale": 1
+        },
+        "captureBeyondViewport": true,
+        "postCaptureCrop": false
+      },
+      "heading_bbox_css": {
+        "x": 249.989990234375,
+        "y": 91.9871826171875,
+        "width": 434.0044250488281,
+        "height": 39.20272445678711,
+        "right": 683.9944152832031,
+        "bottom": 131.1899070739746
+      },
+      "footer_bbox_css": {
+        "x": 217.99880981445312,
+        "y": 5366.49658203125,
+        "width": 1563.4014892578125,
+        "height": 56.00961685180664,
+        "right": 1781.4002990722656,
+        "bottom": 5422.506198883057,
+        "text": "AgentEval\n已保存的变更将用于后续运行；历史冻结输入保持原样。"
+      },
+      "tables": [
+        {
+          "headers": [
+            "指标 / 必评",
+            "判定",
+            "分数",
+            "理由与依据"
+          ],
+          "body_rows": 10,
+          "bbox_css": {
+            "x": 720.1723022460938,
+            "y": 2032.5220947265625,
+            "width": 1004.597412109375,
+            "height": 1395.9736328125,
+            "right": 1724.7697143554688,
+            "bottom": 3428.4957275390625
+          },
+          "first_row_bbox_css": {
+            "x": 720.1723022460938,
+            "y": 2032.5220947265625,
+            "width": 1004.597412109375,
+            "height": 43.50961685180664,
+            "right": 1724.7697143554688,
+            "bottom": 2076.031711578369
+          },
+          "last_row_bbox_css": {
+            "x": 720.1723022460938,
+            "y": 3311.177978515625,
+            "width": 1004.597412109375,
+            "height": 117.31771087646484,
+            "right": 1724.7697143554688,
+            "bottom": 3428.49568939209
+          },
+          "all_cells_inside_capture": true
+        },
+        {
+          "headers": [
+            "版本维度",
+            "预期",
+            "实际观测",
+            "核验与覆盖"
+          ],
+          "body_rows": 4,
+          "bbox_css": {
+            "x": 720.1723022460938,
+            "y": 4318.19921875,
+            "width": 1004.597412109375,
+            "height": 367.83856201171875,
+            "right": 1724.7697143554688,
+            "bottom": 4686.037780761719
+          },
+          "first_row_bbox_css": {
+            "x": 720.1723022460938,
+            "y": 4318.19921875,
+            "width": 1004.597412109375,
+            "height": 43.50961685180664,
+            "right": 1724.7697143554688,
+            "bottom": 4361.708835601807
+          },
+          "last_row_bbox_css": {
+            "x": 720.1723022460938,
+            "y": 4599.14892578125,
+            "width": 1004.597412109375,
+            "height": 86.88902282714844,
+            "right": 1724.7697143554688,
+            "bottom": 4686.037948608398
+          },
+          "all_cells_inside_capture": true
+        }
+      ],
+      "details_state": [
+        {
+          "summary": "查看这项判定依据",
+          "open": false
+        },
+        {
+          "summary": "查看这项判定依据",
+          "open": false
+        },
+        {
+          "summary": "查看这项判定依据",
+          "open": false
+        },
+        {
+          "summary": "查看这项判定依据",
+          "open": false
+        },
+        {
+          "summary": "预期工具、必评集合与前置条件",
+          "open": false
+        },
+        {
+          "summary": "规则与 Judge 指标 · 全部判定与依据",
+          "open": true
+        },
+        {
+          "summary": "判定依据",
+          "open": false
+        },
+        {
+          "summary": "判定依据",
+          "open": false
+        },
+        {
+          "summary": "判定依据",
+          "open": false
+        },
+        {
+          "summary": "判定依据",
+          "open": false
+        },
+        {
+          "summary": "判定依据",
+          "open": false
+        },
+        {
+          "summary": "判定依据",
+          "open": false
+        },
+        {
+          "summary": "判定依据",
+          "open": false
+        },
+        {
+          "summary": "判定依据",
+          "open": false
+        },
+        {
+          "summary": "判定依据",
+          "open": false
+        },
+        {
+          "summary": "判定依据",
+          "open": false
+        },
+        {
+          "summary": "按序工具轨迹 · COMPLETE",
+          "open": true
+        },
+        {
+          "summary": "实际工具结果",
+          "open": false
+        },
+        {
+          "summary": "检索证据与模型用量",
+          "open": true
+        },
+        {
+          "summary": "查看实际观测与证据正文",
+          "open": false
+        },
+        {
+          "summary": "Agent 用量与逐次尝试",
+          "open": false
+        },
+        {
+          "summary": "Judge 原始尝试 · 1 次记录",
+          "open": true
+        },
+        {
+          "summary": "原始响应与解析理由",
+          "open": false
+        },
+        {
+          "summary": "输入、用量与错误",
+          "open": false
+        },
+        {
+          "summary": "实际版本核验 · VERIFIED",
+          "open": true
+        },
+        {
+          "summary": "人工原因与备注",
+          "open": true
+        },
+        {
+          "summary": "脱敏原始 Agent 记录与来源证明",
+          "open": false
+        }
+      ],
+      "checks": {
+        "png_matches_capture_css_bounds": true,
+        "top_heading_complete": true,
+        "footer_complete": true,
+        "table_headers_all_columns_and_last_rows_complete": true,
+        "horizontal_table_overflow": false,
+        "page_horizontal_overflow": false,
+        "visible_api_errors": [],
+        "full_page_visual_review": "PASS",
+        "top_footer_table_pixel_review": "PASS"
+      },
+      "private_layout_sha256": "d5819ddffd99a8df3cdfaf601001f597c88a0894a0a80c246f49c4b74dc872d4"
+    },
+    {
+      "name": "quality-workbench",
+      "title": "质量工作台",
+      "captured_at": "2026-11-17T16:10:51.331Z",
+      "scope": "ENTIRE_RENDERED_PAGE_FROM_HEADER_TO_FOOTER",
+      "source_type": "PROTOCOL_DOUBLE",
+      "viewport_css": {
+        "width": 1800,
+        "height": 1100,
+        "dpr": 0.9999999966988184
+      },
+      "document_css": {
+        "width": 1781,
+        "height": 2535
+      },
+      "capture": {
+        "method": "Page.captureScreenshot",
+        "scope": "ENTIRE_DOCUMENT_FROM_ORIGIN",
+        "cssBounds": {
+          "x": 0,
+          "y": 0,
+          "width": 1800,
+          "height": 2536
+        },
+        "browserZoom": 0.800000011920929,
+        "clipDip": {
+          "x": 0,
+          "y": 0,
+          "width": 1440.0000214576721,
+          "height": 2028.8000302314758,
+          "scale": 1
+        },
+        "captureBeyondViewport": true,
+        "postCaptureCrop": false
+      },
+      "heading_bbox_css": {
+        "x": 249.989990234375,
+        "y": 91.9871826171875,
+        "width": 378.00482177734375,
+        "height": 39.20272445678711,
+        "right": 627.9948120117188,
+        "bottom": 131.1899070739746
+      },
+      "footer_bbox_css": {
+        "x": 217.99880981445312,
+        "y": 2479.326904296875,
+        "width": 1563.4014892578125,
+        "height": 56.00961685180664,
+        "right": 1781.4002990722656,
+        "bottom": 2535.3365211486816,
+        "text": "AgentEval\n已保存的变更将用于后续运行；历史冻结输入保持原样。"
+      },
+      "tables": [
+        {
+          "headers": [
+            "Judge 指标",
+            "有效配对",
+            "精确一致",
+            "一致率",
+            "平均绝对分差"
+          ],
+          "body_rows": 4,
+          "bbox_css": {
+            "x": 274.6294250488281,
+            "y": 1870.3726806640625,
+            "width": 1450.1402587890625,
+            "height": 263.3013000488281,
+            "right": 1724.7696838378906,
+            "bottom": 2133.6739807128906
+          },
+          "first_row_bbox_css": {
+            "x": 274.6294250488281,
+            "y": 1870.3726806640625,
+            "width": 1450.1402587890625,
+            "height": 43.50961685180664,
+            "right": 1724.7696838378906,
+            "bottom": 1913.8822975158691
+          },
+          "last_row_bbox_css": {
+            "x": 274.6294250488281,
+            "y": 2078.96630859375,
+            "width": 1450.1402587890625,
+            "height": 54.70753479003906,
+            "right": 1724.7696838378906,
+            "bottom": 2133.673843383789
+          },
+          "all_cells_inside_capture": true
+        }
+      ],
+      "details_state": [
+        {
+          "summary": "上下文、工具预期与前置条件",
+          "open": false
+        },
+        {
+          "summary": "结论与指标分歧题",
+          "open": false
+        }
+      ],
+      "checks": {
+        "png_matches_capture_css_bounds": true,
+        "top_heading_complete": true,
+        "footer_complete": true,
+        "table_headers_all_columns_and_last_rows_complete": true,
+        "horizontal_table_overflow": false,
+        "page_horizontal_overflow": false,
+        "visible_api_errors": [],
+        "full_page_visual_review": "PASS",
+        "top_footer_table_pixel_review": "PASS"
+      },
+      "private_layout_sha256": "db833a326ff70eb987d34c2ae309d6df00e4efcf2f34d7f12b4fd67c176f9354"
+    }
+  ],
+  "images": [
+    {
+      "path": "docs/images/real-e2e-report-full-20261118.png",
+      "kind": "ENTIRE_PAGE",
+      "width": 1800,
+      "height": 3183,
+      "bytes": 308949,
+      "sha256": "a4cf315ef4bdeb900a4284bc46d291f3f535a6463295dda0977301d28ce91656"
+    },
+    {
+      "path": "docs/images/real-e2e-report-preview-20261118.jpg",
+      "kind": "TOP_SECTION_PREVIEW",
+      "width": 1200,
+      "height": 589,
+      "bytes": 104290,
+      "sha256": "7b8c11ce0e88ba1cd2ff1a060d631a6e191d57cf3a037ed6a22e736740b7990d"
+    },
+    {
+      "path": "docs/images/real-e2e-detail-full-20261118.png",
+      "kind": "ENTIRE_PAGE",
+      "width": 1800,
+      "height": 5423,
+      "bytes": 642037,
+      "sha256": "43983adbedaeb155d00e3d01d723a49cd3401a4e958e43d89bf06a22bd47c0a0"
+    },
+    {
+      "path": "docs/images/real-e2e-detail-preview-20261118.jpg",
+      "kind": "TOP_SECTION_PREVIEW",
+      "width": 1200,
+      "height": 1307,
+      "bytes": 336492,
+      "sha256": "0d3b48c6ba8a11bfa0928403846953a3b57a305a0e9d1463c8360cdd1a7e41b7"
+    },
+    {
+      "path": "docs/images/quality-workbench-full-20261118.png",
+      "kind": "ENTIRE_PAGE",
+      "width": 1800,
+      "height": 2536,
+      "bytes": 190811,
+      "sha256": "c0be2aaee6a509d53aabfb709c48b5ed0b086e9f23b51c3feaf692b536cae988"
+    },
+    {
+      "path": "docs/images/quality-workbench-preview-20261118.jpg",
+      "kind": "TOP_SECTION_PREVIEW",
+      "width": 1200,
+      "height": 693,
+      "bytes": 114837,
+      "sha256": "d6d17de57b147b3e68cb91923fa2e0c4d2ea33fc3e89c9bc883bea1e7adaf92c"
+    }
+  ],
+  "preview_transforms": [
+    {
+      "path": "docs/images/real-e2e-report-preview-20261118.jpg",
+      "source": "docs/images/real-e2e-report-full-20261118.png",
+      "source_crop_css": [
+        0,
+        0,
+        1800,
+        884
+      ],
+      "resize_width": 1200,
+      "scope": "TOP_SECTION_PREVIEW_ONLY_CLICK_FOR_ENTIRE_PAGE"
+    },
+    {
+      "path": "docs/images/real-e2e-detail-preview-20261118.jpg",
+      "source": "docs/images/real-e2e-detail-full-20261118.png",
+      "source_crop_css": [
+        0,
+        0,
+        1800,
+        1960
+      ],
+      "resize_width": 1200,
+      "scope": "TOP_SECTION_PREVIEW_ONLY_CLICK_FOR_ENTIRE_PAGE"
+    },
+    {
+      "path": "docs/images/quality-workbench-preview-20261118.jpg",
+      "source": "docs/images/quality-workbench-full-20261118.png",
+      "source_crop_css": [
+        0,
+        0,
+        1800,
+        1040
+      ],
+      "resize_width": 1200,
+      "scope": "TOP_SECTION_PREVIEW_ONLY_CLICK_FOR_ENTIRE_PAGE"
+    }
+  ],
+  "read_only_controls": {
+    "runtime_enabled": false,
+    "mysql_session_transaction_read_only": true,
+    "allowed_http_methods": [
+      "GET",
+      "HEAD",
+      "OPTIONS"
+    ],
+    "child_environment": "MINIMAL_ALLOWLIST_NO_MODEL_CREDENTIALS",
+    "http_observed_methods": {
+      "GET": 45
+    }
+  },
+  "preservation_and_cleanup": {
+    "status": "PASS",
+    "checks": {
+      "ports_closed": true,
+      "saved_databases_unchanged": true,
+      "old_receipts_and_settings_unchanged": true,
+      "frontend_dist_unchanged": true,
+      "development_main_unchanged": true
+    },
+    "owned_processes_stopped": 4,
+    "protected_old_settings_and_receipts": 21,
+    "private_cleanup_receipt_sha256": "6d765897263ae62497bda997723432c39f6dceef9b4b519f599fd348123bb974",
+    "private_baseline_sha256": "16cafc13e8e065fde43461cdc3af751d48eb383c52d7aecfa4309cc698418855",
+    "database_checks": [
+      {
+        "scope": "real_saved_results",
+        "tables": 14,
+        "before_after_sha256": "c33da04feafc6459b34cb8f29449d145e68d542b7efa742373d146ba8f5274a2"
+      },
+      {
+        "scope": "quality_saved_fixtures",
+        "tables": 18,
+        "before_after_sha256": "e4ff48a002b73726bb02786212c941aa7fb9e030736d0e7d6277248d01e9edca"
+      }
+    ],
+    "old_public_images_and_evidence": "Preserved; new dated files added."
+  },
+  "new_agent_calls": 0,
+  "new_judge_calls": 0,
+  "new_reviews_submitted": 0,
+  "source_app_started": false,
+  "containers_changed": false,
+  "resolved_capture_issues": [
+    "Initial read-only preflight requested the wrong extensions URL and returned 404; fixed before final captures, original failure record retained privately.",
+    "Ego fullPage wrapper produced 25 percent extra blank canvas under browser zoom 0.8; final captures use zoom-aware full-document DIP bounds and actual PNG dimensions were verified.",
+    "A wait predicate looked for the selected case key in an unrelated summary element and timed out; actual navigation to Q02 succeeded and was checked before the final capture."
+  ],
+  "limits": [
+    "Full page means all rendered sections in the recorded details state; raw JSON details remain collapsed and their entire payload is not represented by these screenshots.",
+    "D11 list shows page 1 of 2 (20 of 30 cases) with its pagination controls, while the selected D11 detail and both tables are complete.",
+    "Quality screenshot covers the reviews tab; the regression, drafts, and stability tab contents are outside this three-image request.",
+    "Quality saved records come from automated synthetic protocol fixtures and are not new model-quality evidence or independent human annotations.",
+    "README JPEG previews intentionally show top sections and link to the complete PNGs.",
+    "Existing real-run quality failures, unknown immutable supplier snapshot, and unknown costs remain unchanged."
+  ],
+  "independent_review": {
+    "status": "PASS",
+    "full_images": 3,
+    "preview_images": 3,
+    "business_tables": 4,
+    "body_rows": 22,
+    "table_cells": 109,
+    "readme_local_link_occurrences": 35,
+    "broken_local_links": 0,
+    "preview_to_full_link_pairs": 3,
+    "protected_old_public_files": 18,
+    "available_secret_sources_checked": 13,
+    "credential_value_hits": 0,
+    "credential_pattern_hits": 0,
+    "unavailable_empty_secret_fields": 2,
+    "visual_top_footer_and_table_review": "PASS",
+    "previews_reproduced_from_full_images": "BYTE_IDENTICAL",
+    "private_offline_audit_sha256": "c5b5b7b574b832534ae0683e1b11efa8d69b5d50204fe2bfd5483aa71e2f9248",
+    "private_visual_preview_audit_sha256": "53536512560f40069772913d73b0d6f855669d21d1b54f01547c2e00863fe11a"
+  }
+}
