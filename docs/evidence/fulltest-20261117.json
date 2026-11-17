@@ -1,0 +1,405 @@
+{
+  "verified_at": "2026-11-17T21:04:18.234251+08:00",
+  "commit": "5f73d62e9c6e9ab8e23533f31f0d22784dda46af",
+  "functional_status": "PASS",
+  "screenshot_visual_review": "UNVERIFIED",
+  "scope": "Current full backend suite, separate MySQL constraint variants, production frontend build, local HTTP protocol doubles, and real browser interactions",
+  "backend": {
+    "tests": 286,
+    "passed": 286,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_seconds": 26.332,
+    "python": "Python 3.12.10",
+    "uv": "uv 0.11.16 (135a36367 2026-05-21 x86_64-pc-windows-msvc)",
+    "warnings": [
+      "StarletteDeprecationWarning: Using httpx with starlette.testclient is deprecated; install httpx2 instead."
+    ]
+  },
+  "mysql": {
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_seconds": 1.214,
+    "schema": "agenteval_fulltest_constraints_20261117204726",
+    "migration_revision_output": "20261116_0001 (head)",
+    "schema_retained": true
+  },
+  "frontend": {
+    "build": "PASS",
+    "typecheck": "PASS",
+    "licenses": "PASS",
+    "license_packages": 136,
+    "unknown_licenses": [],
+    "node": "24.15.0",
+    "npm": "11.12.1",
+    "report_chunk_kb": 522.63,
+    "report_chunk_gzip_kb": 176.88
+  },
+  "http_e2e": {
+    "status": "PASS",
+    "count": 23,
+    "checks": [
+      {
+        "name": "default_dashboard_scope_is_explicit_and_not_fake",
+        "status": "PASS"
+      },
+      {
+        "name": "experiment_persists_and_lists_after_new_read",
+        "status": "PASS"
+      },
+      {
+        "name": "accepted_run_has_frozen_N_and_real_progress",
+        "status": "PASS"
+      },
+      {
+        "name": "experiment_start_request_id_is_idempotent",
+        "status": "PASS"
+      },
+      {
+        "name": "case_failure_does_not_lose_following_results",
+        "status": "PASS"
+      },
+      {
+        "name": "report_fixed_denominator_is_consistent",
+        "status": "PASS"
+      },
+      {
+        "name": "judge_failure_is_undetermined_without_false_answer_tag",
+        "status": "PASS"
+      },
+      {
+        "name": "badcase_multiple_automatic_causes_coexist",
+        "status": "PASS"
+      },
+      {
+        "name": "judge_error_is_separate_evaluation_issue",
+        "status": "PASS"
+      },
+      {
+        "name": "manual_annotation_persists_without_changing_judge",
+        "status": "PASS"
+      },
+      {
+        "name": "same_experiment_multiple_independent_runs_retained",
+        "status": "PASS"
+      },
+      {
+        "name": "same_data_and_scoring_conditions_are_comparable",
+        "status": "PASS"
+      },
+      {
+        "name": "comparison_uses_common_valid_samples_not_N",
+        "status": "PASS"
+      },
+      {
+        "name": "comparison_keeps_missing_score_reasons",
+        "status": "PASS"
+      },
+      {
+        "name": "rescore_finishes_without_any_agent_request",
+        "status": "PASS"
+      },
+      {
+        "name": "original_score_and_annotation_are_unchanged",
+        "status": "PASS"
+      },
+      {
+        "name": "rescore_does_not_duplicate_agent_usage",
+        "status": "PASS"
+      },
+      {
+        "name": "different_thresholds_only_show_side_by_side_no_delta",
+        "status": "PASS"
+      },
+      {
+        "name": "cross_run_score_set_is_rejected",
+        "status": "PASS"
+      },
+      {
+        "name": "report_exposes_four_real_chart_types",
+        "status": "PASS"
+      },
+      {
+        "name": "report_charts_have_sample_drilldown_ids",
+        "status": "PASS"
+      },
+      {
+        "name": "dashboard_default_real_scope_excludes_protocol_quality",
+        "status": "PASS"
+      },
+      {
+        "name": "secrets_not_exposed_in_api_payloads",
+        "status": "PASS"
+      }
+    ],
+    "run_ids": [
+      "f792025a-f4ad-43dc-857c-b7342c801e9f",
+      "267e2180-c1c3-4ae4-9259-4eb5be53bade"
+    ],
+    "score_set_ids": [
+      "cec90c05-b681-45a4-a792-5f53a2df0e96",
+      "71c7c7d8-b15a-4e20-8f40-1a5f4c5058f6",
+      "bc9c51c3-d595-4fa3-bd48-0a8deb91047b"
+    ],
+    "expected_fixture_report": {
+      "N": 6,
+      "P": 3,
+      "F": 2,
+      "U": 1
+    }
+  },
+  "browser": {
+    "status": "PASS",
+    "count": 36,
+    "checks": [
+      {
+        "name": "seven_main_navigation_routes_visible",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "dashboard_protocol_source_has_six_frozen_cases",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "dataset_empty_name_validation",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "dataset_created_via_browser",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "dataset_persists_after_reload",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "case_created_via_browser",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "case_persists_after_reload",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "agent_configs_load_with_protocol_source_labels",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "experiment_created_via_browser",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "browser_start_returns_real_run_id",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "browser_run_progress_reaches_completed",
+        "pass": true,
+        "details": "Exact persistent progress and 1/1 evaluated"
+      },
+      {
+        "name": "browser_created_run_report_has_one_pass",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "six_case_report_keeps_pass_fail_unknown_and_denominators",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "report_evidence_expands_with_incomplete_protocol_boundary",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "comparison_report_renders_four_chart_canvases",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "comparison_labels_use_common_valid_pairs",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "right_chart_keyboard_drill_uses_right_run_and_exact_four_members",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "report_fail_entry_applies_fail_filter",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "fail_list_has_exact_two_rows",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "failure_detail_keeps_saved_judge_reason",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "judge_original_attempt_can_expand",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "browser_annotation_save_success_feedback",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "browser_annotation_persists_after_reload",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "browser_rescore_annotation_is_isolated",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "browser_return_original_keeps_annotation",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "judge_error_detail_is_unknown_and_scoring_error",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "badcases_page_shows_saved_browser_note",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "badcases_manual_reason_filter_returns_exact_saved_case",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "missing_report_has_explicit_error_and_retry",
+        "pass": true,
+        "details": "Recovery button label is 重新加载; prior harness expected 重试"
+      },
+      {
+        "name": "missing_report_reload_preserves_explicit_resource_error",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "report_recovers_when_valid_run_is_selected",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "report_actual_390px_has_no_page_horizontal_overflow",
+        "pass": true,
+        "details": {
+          "innerWidth": 390,
+          "scrollWidth": 372
+        }
+      },
+      {
+        "name": "detail_actual_390px_has_no_page_horizontal_overflow",
+        "pass": true,
+        "details": {
+          "innerWidth": 390,
+          "scrollWidth": 372
+        }
+      },
+      {
+        "name": "mobile_return_to_list_keeps_failure_filter",
+        "pass": true,
+        "details": null
+      },
+      {
+        "name": "detail_actual_320px_has_no_page_horizontal_overflow",
+        "pass": true,
+        "details": {
+          "innerWidth": 320,
+          "scrollWidth": 302
+        }
+      },
+      {
+        "name": "report_actual_320px_has_no_page_horizontal_overflow",
+        "pass": true,
+        "details": {
+          "innerWidth": 320,
+          "scrollWidth": 302
+        }
+      }
+    ],
+    "previous_harness_attempts": [
+      {
+        "name": "missing_report_has_explicit_error_and_retry",
+        "pass": false,
+        "details": null
+      }
+    ],
+    "screenshot": {
+      "status": "UNVERIFIED",
+      "attempts": 2,
+      "reason": "Page.captureScreenshot timed out after 15000ms; no new screenshot visual acceptance"
+    },
+    "browser_created_run": {
+      "url": "http://127.0.0.1:15183/experiments?experiment=2&run=0f600a82-5bec-490f-b049-17edba3fdbd7",
+      "run_id": "0f600a82-5bec-490f-b049-17edba3fdbd7"
+    }
+  },
+  "model_calls": {
+    "agent_requests": 13,
+    "judge_requests": 19,
+    "source": "PROTOCOL_DOUBLE",
+    "real_model_calls": 0
+  },
+  "cleanup": {
+    "isolated_schemas_retained": true,
+    "status": "PASS",
+    "checked_at": "2026-11-17T21:03:53.7175832+08:00",
+    "remaining_listeners": [],
+    "original_mysql_container_untouched": true,
+    "temporary_ports": [
+      15183,
+      18090,
+      18190
+    ]
+  },
+  "protected_history": {
+    "status": "PASS",
+    "files": 89,
+    "changed_files": [],
+    "categories": [
+      "docs/evidence",
+      "data",
+      "openspec"
+    ]
+  },
+  "limitations": [
+    "Local Agent and Judge were PROTOCOL_DOUBLE; no new real model or printer-service quality evaluation.",
+    "320px and 390px were actual innerWidth geometry checks; screenshot visual review remains unverified.",
+    "MySQL variants revalidate existing test functions and are listed separately, not added as unique backend tests.",
+    "No performance load, security penetration, or multi-device compatibility testing was performed."
+  ],
+  "product_source_changes": false,
+  "historical_evaluation_conclusions_changed": false,
+  "private_evidence_root": ".local-validation/fulltest-20261117"
+}
