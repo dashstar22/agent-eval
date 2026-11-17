@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { api, problem } from '../api'
+import { extensions } from '../api/extensions'
 import type { ApiProblem, Report } from '../types'
 import { date, pretty, query } from '../workbench'
 import AsyncState from '../components/AsyncState.vue'
@@ -14,9 +15,11 @@ import StatusBadge from '../components/StatusBadge.vue'
 import ResultSummary from '../components/ResultSummary.vue'
 import EvidenceNotice from '../components/EvidenceNotice.vue'
 import SectionCard from '../components/SectionCard.vue'
+import ProblemBox from '../components/ProblemBox.vue'
 
 const route = useRoute(), router = useRouter()
 const report = ref<Report | null>(null), loading = ref(false), error = ref<ApiProblem | null>(null)
+const exporting = ref(''), exportError = ref<ApiProblem | null>(null)
 const run = computed(() => query(route.query.run_id) || query(route.query.run))
 const score = computed(() => query(route.query.score_set_id) || query(route.query.score_set))
 const compareRun = computed(() => query(route.query.compare_run_id) || query(route.query.compare))
@@ -32,7 +35,7 @@ let generation = 0
 
 async function load() {
   const current = ++generation
-  report.value = null; error.value = null
+  report.value = null; error.value = null; exportError.value = null
   if (!run.value) { loading.value = false; return }
   loading.value = true
   try {
@@ -57,8 +60,17 @@ async function showEvidence() {
   evidenceElement.value?.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
   evidenceElement.value?.querySelector('summary')?.focus({ preventScroll: true })
 }
+async function exportReport(format: 'json' | 'csv' | 'html') {
+  if (!report.value || exporting.value) return
+  const target = report.value, current = generation
+  exporting.value = format; exportError.value = null
+  try { await extensions.exportReport(target.run.id, target.score_set.id, format) }
+  catch (e) { if (current === generation) exportError.value = problem(e) }
+  finally { exporting.value = '' }
+}
 watch(compareRun, value => { if (value) comparisonExpanded.value = true })
 watch(() => route.fullPath, load, { immediate: true })
+onBeforeUnmount(() => { generation++ })
 </script>
 
 <template>
@@ -66,6 +78,7 @@ watch(() => route.fullPath, load, { immediate: true })
     <PageHeading title="评测报告" description="先查看质量结果，再从失败用例核对理由与证据。">
       <template #actions>
         <RouterLink v-if="report && report.summary.F > 0" class="report-primary-action" :to="evaluationsLink('FAIL')">查看失败用例 {{ report.summary.F }} →</RouterLink>
+        <RouterLink v-if="report" class="text-link" :to="{ path: '/quality', query: { run_id: report.run.id, score_set_id: report.score_set.id } }">质量工作台 →</RouterLink>
         <ElButton :disabled="!run" :loading="loading" @click="load">刷新报告</ElButton>
       </template>
     </PageHeading>
@@ -83,6 +96,7 @@ watch(() => route.fullPath, load, { immediate: true })
     <AsyncState :loading="loading" :error="error" :empty="!run" empty-title="选择一条运行查看报告" empty-text="报告只展示持久化结果，没有运行时不会生成示例成绩。" @retry="load">
       <template #empty-action><RouterLink class="text-link" to="/experiments">前往实验创建运行</RouterLink></template>
       <div v-if="report" class="report-content">
+        <section class="panel report-exports" aria-label="导出固定评分集"><div><strong>导出当前报告</strong><p class="small muted">固定评分集 {{ report.score_set.id.slice(0,8) }} · 保留来源、版本、有效分母和脱敏证据；不触发模型调用。</p></div><div class="page-actions"><ElButton v-for="format in ['json', 'csv', 'html'] as const" :key="format" :loading="exporting === format" :disabled="Boolean(exporting) && exporting !== format" @click="exportReport(format)">下载 {{ format.toUpperCase() }}</ElButton></div><div v-if="exportError" style="flex-basis:100%"><ProblemBox :error="exportError" /></div></section>
         <div class="report-run-context">
           <span>运行 <StatusBadge :value="report.run.status" domain="run" /></span>
           <span>{{ report.score_set.kind }} <StatusBadge :value="report.score_set.status" domain="scoring" /></span>
@@ -146,6 +160,8 @@ watch(() => route.fullPath, load, { immediate: true })
 </template>
 
 <style scoped>
+.report-exports { display: flex; gap: var(--space-3) var(--space-5); align-items: center; justify-content: space-between; flex-wrap: wrap; padding: var(--space-4) var(--space-5); }
+.report-exports p { overflow-wrap: anywhere; margin-top: var(--space-1); }
 .report-page { min-width: 0; }
 .report-primary-action { display: inline-flex; min-height: var(--control-height); align-items: center; justify-content: center; padding: var(--space-2) var(--space-4); border-radius: var(--radius-control); color: var(--paper); background: var(--blue); font-weight: 600; }
 .report-primary-action:hover { background: color-mix(in srgb, var(--blue) 88%, var(--navy)); }

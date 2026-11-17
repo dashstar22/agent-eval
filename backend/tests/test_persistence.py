@@ -19,23 +19,135 @@ from agenteval.persistence import (
 )
 
 
+def fixed_migrations():
+    migrations = []
+    for migration in sorted((Path(__file__).parents[1] / "alembic/versions").glob("*.py")):
+        spec = importlib.util.spec_from_file_location(migration.stem, migration)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        migrations.append(module)
+    return migrations
+
+
 def test_fixed_migration_matches_models_and_seeds_control():
     from alembic.autogenerate import compare_metadata
     from alembic.migration import MigrationContext
     from alembic.operations import Operations
     from sqlalchemy import text
 
-    migration = Path(__file__).parents[1] / "alembic/versions/20261116_0001_foundation.py"
-    spec = importlib.util.spec_from_file_location("foundation_test", migration)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
     engine = make_engine("sqlite+pysqlite:///:memory:")
     with engine.begin() as connection:
         context = MigrationContext.configure(connection)
         with Operations.context(context):
-            module.upgrade()
+            for module in fixed_migrations():
+                module.upgrade()
         assert compare_metadata(context, Base.metadata) == []
         assert connection.scalar(text("SELECT id FROM runtime_control")) == 1
+    engine.dispose()
+
+
+def test_0002_upgrade_preserves_legacy_rows_and_frozen_fingerprints():
+    from alembic.autogenerate import compare_metadata
+    from alembic.migration import MigrationContext
+    from alembic.operations import Operations
+    from sqlalchemy import MetaData, Table
+
+    from agenteval.schemas import CaseCreate
+    from agenteval.services import case_content
+    from agenteval.snapshots import digest
+
+    migrations = {module.revision: module for module in fixed_migrations()}
+    engine = make_engine("sqlite+pysqlite:///:memory:")
+    with engine.begin() as connection:
+        with Operations.context(MigrationContext.configure(connection)):
+            migrations["20261116_0001"].upgrade()
+    assert "tool_assertions" not in {column["name"] for column in inspect(engine).get_columns("test_cases")}
+    legacy_cases = Table("test_cases", MetaData(), autoload_with=engine)
+    old_content = CaseCreate(case_key="LEGACY", question="旧问题", expected_answer="旧参考行为",
+                             expected_tools=["search"], tags=["历史合成"],
+                             preconditions={"prior_turns": ["旧前置轮次"]}, source={"fixture": "0001"},
+                             license="CC0-1.0", seen_regression=True).model_dump(exclude={"tool_assertions"})
+    old_case_fingerprint = digest(old_content)
+    snapshot = {"schema_version": "agenteval-snapshot-v1", "cases": [old_content | {"revision": 7}],
+                "judge": {"model": "legacy-judge"}, "rules": {"version": "legacy-rules"}}
+    with Session(engine) as session, session.begin():
+        dataset = Dataset(name="旧数据集", revision=4)
+        config = AgentConfig(name="旧连接", adapter_type="MOCK", base_url="http://127.0.0.1", source_type="MOCK")
+        session.add_all([dataset, config])
+        session.flush()
+        stamp = datetime(2026, 11, 16, 1, 2, 3, 123456, tzinfo=timezone.utc)
+        saved_case_id = session.execute(legacy_cases.insert().values(
+            dataset_id=dataset.id, **old_content, revision=7, created_at=stamp, updated_at=stamp,
+        )).inserted_primary_key[0]
+        experiment = Experiment(name="旧实验", dataset_id=dataset.id, agent_config_id=config.id)
+        session.add(experiment)
+        session.flush()
+        run = EvaluationRun(experiment_id=experiment.id, request_id=str(uuid4()), status="COMPLETED",
+                            snapshot=snapshot, snapshot_sha256=digest(snapshot), total_cases=1)
+        session.add(run)
+        session.flush()
+        case_run = CaseRun(run_id=run.id, case_key="LEGACY", case_snapshot=snapshot["cases"][0],
+                           phase="EVALUATED", agent_status="SUCCEEDED", answer="旧回答",
+                           raw_agent={"fixture": "legacy-evidence"}, usage={"total_tokens": None})
+        score = ScoreSet(run_id=run.id, status="COMPLETED", judge_snapshot=snapshot["judge"],
+                         rule_snapshot=snapshot["rules"], fingerprint="b" * 64)
+        session.add_all([case_run, score])
+        session.flush()
+        session.add_all([
+            CaseEvaluation(run_id=run.id, score_set_id=score.id, case_run_id=case_run.id,
+                           status="SUCCEEDED", conclusion="PASS", completed_at=stamp),
+            EvaluationScore(run_id=run.id, score_set_id=score.id, case_run_id=case_run.id,
+                            metric="correctness", status="PASS", score=5, reason="旧评分理由", evidence={"fixture": "0001"}),
+            BadcaseAnnotation(run_id=run.id, score_set_id=score.id, case_run_id=case_run.id, note="旧人工备注"),
+        ])
+        run_id, case_run_id = run.id, case_run.id
+    with engine.connect() as connection:
+        old_tables = inspect(connection).get_table_names()
+        # 原始数据库值也必须相等，避免反序列化后的等价对象掩盖历史 JSON 重写。
+        before = {table: [dict(row) for row in connection.exec_driver_sql(f'SELECT * FROM "{table}" ORDER BY id').mappings()]
+                  for table in old_tables}
+    with engine.begin() as connection:
+        context = MigrationContext.configure(connection)
+        with Operations.context(context):
+            migrations["20261117_0002"].upgrade()
+        for table, rows in before.items():
+            after = [dict(row) for row in connection.exec_driver_sql(f'SELECT * FROM "{table}" ORDER BY id').mappings()]
+            if table == "test_cases":
+                assert all(row.pop("tool_assertions") is None for row in after)
+            assert after == rows, table
+        assert compare_metadata(context, Base.metadata) == []
+    with Session(engine) as session:
+        case = session.get(TestCase, saved_case_id)
+        assert case.tool_assertions is None
+        assert case_content(case) == old_content and digest(case_content(case)) == old_case_fingerprint
+        saved_run = session.get(EvaluationRun, run_id)
+        assert saved_run.snapshot == snapshot and saved_run.snapshot_sha256 == digest(snapshot)
+        assert session.get(CaseRun, case_run_id).case_snapshot == snapshot["cases"][0]
+    engine.dispose()
+
+
+def test_empty_tool_assertions_preserve_case_content_fingerprint_after_reload():
+    from agenteval.services import case_content
+    from agenteval.snapshots import digest
+
+    engine = make_engine("sqlite+pysqlite:///:memory:")
+    Base.metadata.create_all(engine)
+    with Session(engine) as session:
+        _, _, case, *_ = make_run(session)
+        original = case_content(case)
+        original_fingerprint = digest(original)
+        assert "tool_assertions" not in original
+        for assertions in (None, {}, {"sequence": None, "max_calls": {}}):
+            case.tool_assertions = assertions
+            session.flush()
+            session.expire(case)
+            assert case.tool_assertions == assertions
+            assert case_content(case) == original and digest(case_content(case)) == original_fingerprint
+        case.tool_assertions = {"sequence": ["search"], "max_calls": {"search": 1}}
+        session.flush()
+        session.expire(case)
+        assert case_content(case)["tool_assertions"] == case.tool_assertions
+        assert digest(case_content(case)) != original_fingerprint
     engine.dispose()
 
 
@@ -81,7 +193,7 @@ def make_run(session):
 def test_schema_entities_indexes_and_utc(store):
     tables = inspect(store.bind).get_table_names()
     assert set(Base.metadata.tables).issubset(tables)
-    assert len(Base.metadata.tables) == 13
+    assert len(Base.metadata.tables) == 17
     assert {index["name"] for index in inspect(store.bind).get_indexes("case_runs")} >= {"ix_case_run_phase"}
     dataset, *_ = make_run(store)
     store.expire(dataset)

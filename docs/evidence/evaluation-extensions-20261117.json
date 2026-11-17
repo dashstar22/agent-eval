@@ -1,0 +1,340 @@
+{
+  "date": "2026-11-17",
+  "scope": "six evaluation-loop extensions, Vue/FastAPI/MySQL; synthetic saved facts and protocol-double execution",
+  "external_agent_requests": 0,
+  "external_judge_requests": 0,
+  "real_human_quality_review": "NOT_PERFORMED; automated form fixtures verify interface and persistence only",
+  "backend": {
+    "command": "uv run --locked pytest --junitxml=../.local-validation/quality-extensions-tests.xml",
+    "passed": 412,
+    "skipped": 1,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 47.779,
+    "skip_reasons": [
+      "backend/tests/test_seed.py:40: 外部原冻结包不在本机；本地来源副本始终由load_demo校验"
+    ],
+    "warning": "existing Starlette TestClient httpx deprecation",
+    "coverage_notes": [
+      "0001 legacy rows upgraded to 0002 unchanged in isolated SQLite migration test",
+      "empty tool assertions retain legacy case fingerprint",
+      "review applicability shares saved-execution context requirements with Judge",
+      "stale runtime owner cannot reclaim or overwrite recovered repeat batch",
+      "analysis and export preserve original database facts"
+    ]
+  },
+  "mysql_http_cli": {
+    "passed": 29,
+    "checks": [
+      "blind_review_omits_saved_judge",
+      "review_survives_fresh_http_get",
+      "human_system_disagreement_identifies_original_case",
+      "regression_stable_pass",
+      "regression_candidate_fail",
+      "regression_unknown_inconclusive",
+      "stability_compares_three_distinct_executions",
+      "same_execution_cannot_count_as_repeat",
+      "approved_candidate_created_disabled",
+      "candidate_retains_frozen_tool_assertions",
+      "candidate_approval_is_idempotent",
+      "export_json_is_download_attachment",
+      "export_csv_is_download_attachment",
+      "export_html_is_download_attachment",
+      "export_preserves_selected_score_set",
+      "export_contains_separate_review_history",
+      "review_and_candidate_do_not_change_saved_report",
+      "real_mysql_migration_matches_models",
+      "review_persists_in_independent_mysql_session",
+      "cli_stable_exit_0",
+      "cli_candidate_exit_1",
+      "cli_unknown_exit_2",
+      "final_process_blind_review_keeps_unavailable_faithfulness_inapplicable",
+      "structured_review_survives_final_process_restart",
+      "completed_two_member_repeat_batch_survives_process_restart",
+      "actual_repeat_members_preserve_full_source_snapshot",
+      "repeat_request_idempotence_after_restart_creates_no_extra_runs",
+      "synthetic_real_confirmation_branch_never_dispatched",
+      "test_only_real_configuration_disabled_after_ui_verification"
+    ],
+    "schema": "agenteval_quality_20261117_af5179149920",
+    "migration": "20261117_0002, compare_metadata matches models",
+    "historical_database_modified": false
+  },
+  "browser": {
+    "passed": 39,
+    "checks": [
+      {
+        "label": "Blind review uses dedicated blind=true endpoint",
+        "pass": true
+      },
+      {
+        "label": "Blind review never fetches full Judge detail",
+        "pass": true
+      },
+      {
+        "label": "Judge results absent before independent submission",
+        "pass": true
+      },
+      {
+        "label": "Missing confirmation blocks review save",
+        "pass": true
+      },
+      {
+        "label": "Structured review persists via actual UI (automated fixture)",
+        "pass": true
+      },
+      {
+        "label": "Judge comparison shown only after save and explicit action",
+        "pass": true
+      },
+      {
+        "label": "Review history and consistency loaded from stored results",
+        "pass": true
+      },
+      {
+        "label": "Comparison-viewed mode is visible",
+        "pass": true
+      },
+      {
+        "label": "Regression candidate with one new failure returns FAIL through UI",
+        "pass": true
+      },
+      {
+        "label": "Comparable stable candidate returns PASS through UI",
+        "pass": true
+      },
+      {
+        "label": "Insufficient coverage returns INCONCLUSIVE, never PASS",
+        "pass": true
+      },
+      {
+        "label": "Badcase source creates a pending regression draft via UI; expected behavior retained instead of failed answer",
+        "pass": true
+      },
+      {
+        "label": "Draft approval requires explicit human-confirmation checkbox",
+        "pass": true
+      },
+      {
+        "label": "Approval creates a disabled regression case and retains source links",
+        "pass": true
+      },
+      {
+        "label": "Approved regression case is disabled in dataset editor",
+        "pass": true
+      },
+      {
+        "label": "Tool assertion form rejects duplicate order and negative call counts",
+        "pass": true
+      },
+      {
+        "label": "Tool order and call-count assertions save with explicitly required metrics",
+        "pass": true
+      },
+      {
+        "label": "Actual JSON browser download retains fixed score set and stored evidence",
+        "pass": true,
+        "file": "ui-report.json"
+      },
+      {
+        "label": "Actual CSV browser download retains fixed score set and stored evidence",
+        "pass": true,
+        "file": "ui-report.csv"
+      },
+      {
+        "label": "Actual HTML browser download retains fixed score set and stored evidence",
+        "pass": true,
+        "file": "ui-report.html"
+      },
+      {
+        "label": "Detail actions deep-link to review and draft with actual run, score, and case identities",
+        "pass": true
+      },
+      {
+        "label": "Repeat batch starts from frozen source via actual UI with displayed total budget",
+        "pass": true
+      },
+      {
+        "label": "Batch polling reaches COMPLETED and exposes independent run reports",
+        "pass": true,
+        "batchId": "0468530e-ec30-4ed6-a12c-026f302ff016",
+        "text": "重复批次与持久进度\n\n活动批次每 2.5 秒读取进度。中断后保留已执行记录，未执行成员不会自动重放。\n\n刷新批次列表\n选择批次\n选择批次查看进度\n2026/11/17 20:28:48 · QUEUED · 2 次 · 0468530e\n刷新当前批次\n0468530e-ec30-4ed6-a12c-026f302ff016\n处理完成\n\n合计调用上限 24 · 合计时长上限 120 秒 · 非真实调用来源\n\n顺序\t运行\t执行状态\t证据\n1\t6a975af5-e7b3-4f80-830e-f38a4ac5861e\t处理完成\t报告 →\n2\tea72a1a8-6d26-41fc-936c-4fb9d743fa11\t处理完成\t报告 →\n将这些运行加入稳定性分析"
+      },
+      {
+        "label": "Two independent batch runs feed stability analysis through UI",
+        "pass": true
+      },
+      {
+        "label": "Stability selection rejects a duplicate execution instead of counting RESCORE as repetition",
+        "pass": true
+      },
+      {
+        "label": "Same-configuration baseline/candidate analysis displays P/F/U, known conclusion flips, sample counts and score dispersion",
+        "pass": true
+      },
+      {
+        "label": "Actual 320px stability layout has no horizontal page overflow or escaping controls",
+        "pass": true,
+        "geometry": {
+          "width": 320,
+          "scrollWidth": 320,
+          "overflow": []
+        }
+      },
+      {
+        "label": "Actual 320px reviews layout has no horizontal page overflow or escaping controls",
+        "pass": true,
+        "geometry": {
+          "width": 320,
+          "scrollWidth": 320,
+          "overflow": []
+        }
+      },
+      {
+        "label": "Actual 390px reviews layout has no horizontal page overflow or escaping controls",
+        "pass": true,
+        "geometry": {
+          "width": 390,
+          "scrollWidth": 390,
+          "overflow": []
+        }
+      },
+      {
+        "label": "Actual 320px drafts layout has no horizontal page overflow or escaping controls",
+        "pass": true,
+        "geometry": {
+          "width": 320,
+          "scrollWidth": 320,
+          "overflow": []
+        }
+      },
+      {
+        "label": "Actual 390px drafts layout has no horizontal page overflow or escaping controls",
+        "pass": true,
+        "geometry": {
+          "width": 390,
+          "scrollWidth": 390,
+          "overflow": []
+        }
+      },
+      {
+        "label": "Actual 390px stability layout has no horizontal page overflow or escaping controls",
+        "pass": true,
+        "geometry": {
+          "width": 390,
+          "scrollWidth": 390,
+          "overflow": []
+        }
+      },
+      {
+        "label": "Actual 320px regression layout has no horizontal page overflow or escaping controls",
+        "pass": true,
+        "geometry": {
+          "width": 320,
+          "scrollWidth": 320,
+          "overflow": []
+        }
+      },
+      {
+        "label": "Actual 390px regression layout has no horizontal page overflow or escaping controls",
+        "pass": true,
+        "geometry": {
+          "width": 390,
+          "scrollWidth": 390,
+          "overflow": []
+        }
+      },
+      {
+        "label": "No-run empty state explains how to start review",
+        "pass": true
+      },
+      {
+        "label": "Quality tool navigation works with Tab and Enter and retains visible focus",
+        "pass": true
+      },
+      {
+        "label": "Missing run shows backend error with retry instead of stale or invented results",
+        "pass": true
+      },
+      {
+        "label": "Synthetic REAL_EXTERNAL configuration branch requires explicit real-call checkbox, displays 24-call/120s total budget, and disables start until confirmed; no start action or external request",
+        "pass": true,
+        "scope": "Synthetic configuration branch only; stored execution remains PROTOCOL_DOUBLE; 0 external requests"
+      },
+      {
+        "label": "Final frontend and restarted API show regression FAIL and percentage-point units without new execution",
+        "pass": true
+      }
+    ],
+    "scope": "Isolated MySQL and protocol-double runtime; 0 real model calls. Human review and approval fields are automated interface fixtures, not real human quality evidence.",
+    "screenshots": [
+      {
+        "path": "docs/images/quality-review-20261117.png",
+        "sha256": "c837c6933b497d8846858fb5cc91877c254b00a91c08bc2cefe932675bf52e89"
+      }
+    ],
+    "limitations": [
+      "Review screenshot captured and inspected; further result screenshots blocked by Ego pending-navigation capture errors.",
+      "320px/390px layouts verified with actual browser geometry; no screenshot-based claim for all result states.",
+      "REAL_EXTERNAL confirmation checkbox used a synthetic configuration branch; never dispatched; test-only config subsequently disabled."
+    ]
+  },
+  "frontend": {
+    "typecheck": "PASS",
+    "build": "PASS",
+    "licenses": {
+      "packages": 136,
+      "unknown": []
+    },
+    "new_dependencies": false,
+    "quality_view_js_kb": 46.98,
+    "report_view_js_kb": 523.48,
+    "limitation": "existing ReportsView chunk remains above the 500kB build warning threshold"
+  },
+  "historical_protection": {
+    "status": "UNCHANGED",
+    "saved_api_resources": 8,
+    "baseline_file_count": 76,
+    "method": "reran original read-only baseline verifier against retained historical API and evidence files"
+  },
+  "source_sha256": {
+    "backend/alembic/versions/20261117_0002_quality_extensions.py": "d33cc92687c60d02d9e20e84b482d4bb3206638c8aaebd4d78a16a66b13ff7df",
+    "backend/src/agenteval/analysis.py": "37830f745a9a066534f4e8c868f0d05c55ac275a16c3062afbab8f7f94204c7f",
+    "backend/src/agenteval/analysis_api.py": "c0d6da7a65e3e335f27f8ed6c2e1a25e9a62377b489f751889e38274fb84befc",
+    "backend/src/agenteval/analysis_schemas.py": "5c980b0c04bf85fd225972b53e9d1d14b9ac7cbdbf2f6fd863ee91abc48a632b",
+    "backend/src/agenteval/main.py": "7f47189bf21c764ef86be8f8182b8efdab457b68cdd22ef871c333687c8baa4e",
+    "backend/src/agenteval/persistence.py": "e19d2a5923e553d86d8c4d6fbc375f81e3acd22bb192cf709657054634e3e56b",
+    "backend/src/agenteval/regression_cli.py": "69402b87336eaa911413596d3379861e70a029e01fd336fe0bf0f818c6395ca8",
+    "backend/src/agenteval/repeat_api.py": "09c927113ed64e8dbdbcd79ebc152e6154b56df8829b105835811bd8d8bff820",
+    "backend/src/agenteval/repeat_models.py": "26c3aa82275ebd0d476ea349c7ed1d631d60e4d22091bf246a042dc55437d129",
+    "backend/src/agenteval/repeat_runs.py": "994e4bb6cf3923ea8403b0e413c24e24676a9f6d5c000d06f4b356dcabd02462",
+    "backend/src/agenteval/repeat_schemas.py": "f940c3be2c723632362daa76604aaef8e7392cd35bc2147c45844db6c814b501",
+    "backend/src/agenteval/review_api.py": "915821c8af5fee239931914b7606893b724e814b8e5e34d41152866b1ccef6bb",
+    "backend/src/agenteval/review_models.py": "6e3d131c5fd1961d502088933bf887261b3b1695241e4961cee61d1082779d14",
+    "backend/src/agenteval/review_schemas.py": "461d836fd86ac45a9d7eb6e2b6e1e964c80c40982ba12d080903b4294b5bf140",
+    "backend/src/agenteval/reviews.py": "1e616cb40ac560420c3e4f07b3b74b9461a50541cf0c81172561de4ea33b9ee7",
+    "backend/src/agenteval/rules.py": "ce07017c35e15e0da662bb78a127afddfacbb68e8ffd7abf738542a6356fd0e7",
+    "backend/src/agenteval/runtime_control.py": "941ab3c978ff0bb86820ce45d6d6f3201251eb623a21b772cc64a8388bf2c21d",
+    "backend/src/agenteval/schemas.py": "090c7dfc1ada8ce6d64a1bf0e157f92984d3e7360c6c74616c17322fdda91db0",
+    "backend/src/agenteval/services.py": "654b75986087bbfbf2b65f9c6d068ccaf11e6c059e8b14563bce76cc9cc54604",
+    "backend/tests/test_analysis.py": "823996a4bf1f985710e9fc9941a5942d40994d0b23141ac2ffd4ffaf10f7b47c",
+    "backend/tests/test_persistence.py": "43a26ea66ea0463be4fb7262f0cc4fc736434503cb0ea2a4ebeb02a1f35f528c",
+    "backend/tests/test_repeat_batches.py": "beda04cdf101fcd9f1e697d6b295df4d0ee74628cb93442cd1c84f5c26cd04be",
+    "backend/tests/test_reviews.py": "9d275aa22dad988d2be6444adcbca4b4c671d28932359f323d75de35b5c49ef9",
+    "backend/tests/test_tool_assertions.py": "5b8587acb997fce4768140a8a3555a640adc9be40cf66e864c818a3fb77a8fbb",
+    "frontend/src/api/extensions.ts": "df3aaa686baa16bb73ba283a8a2002436363ed822d14edf39466c4a37ce507d6",
+    "frontend/src/components/CaseDetailPanel.vue": "300449a78a88cf6e99b6e804cebc0fcd468fe5e0c47d4dca8bee9a935bc6059d",
+    "frontend/src/components/quality/QualityDrafts.vue": "18a5eeda8748108090c6e6900f2e23389bc5470f4b091321acd4277416aaf069",
+    "frontend/src/components/quality/QualityRegression.vue": "fc5e3dc03a3fa64a7e2a6519e3361898ea04c47f2166989da996f31091edc832",
+    "frontend/src/components/quality/QualityReviews.vue": "6f1da873f0f03f763b6f73038e6f61fa675dfbf985b00fbb89883a4e7060217f",
+    "frontend/src/components/quality/QualityStability.vue": "48f2cd3d063c4ba4bc994b26729d9c4cef0da73c20be48ae20e7156920a67eab",
+    "frontend/src/quality.css": "56d928cad6006f5c0cf2a793de1e799d782efdedf9961e19cc331d4726857d0f",
+    "frontend/src/router/index.ts": "36538d83aa1de802c22bfc52b848474a7538141d60b09daef14b3f00d3a4541e",
+    "frontend/src/types/extensions.ts": "4837f6dbeb3b8d3de365ce6358ec451b63c269a0d7c9eb7e1e3ffa2c6d224ae6",
+    "frontend/src/types/index.ts": "b5946e3fd6811b42ddd9f5109b35f059316462f5f0f45ca95c331c43d5497a7a",
+    "frontend/src/views/DatasetsView.vue": "a6b4ffca202ce3f2dab03356798657e55697431063fe183a7f7f6f1773e4d209",
+    "frontend/src/views/QualityView.vue": "814840e72021ad7a9e4051777b0c8d146274468e74943fceb5cf22618ecb6cb9",
+    "frontend/src/views/ReportsView.vue": "42772d375ef7a9e450de617115ec880ce3ce8367df15f1fe8cf94bf60f81255a",
+    "frontend/src/workbench.ts": "7da7c7278bd196958b1a3e76e94f283554f119c2eb2ef21ff60255ddc7cd6e6b"
+  }
+}

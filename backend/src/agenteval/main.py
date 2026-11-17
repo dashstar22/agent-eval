@@ -275,10 +275,16 @@ def create_app(engine=None, *, runtime_enabled=True, runtime_worker=None, runtim
     from .runtime_api import add_runtime_routes
     from .experiment_api import add_experiment_routes
     from .workbench_api import add_workbench_routes
+    from .repeat_api import add_repeat_routes
+    from .review_api import add_review_routes
+    from .analysis_api import add_analysis_routes
     add_scoring_routes(router, get_session)
     add_runtime_routes(router)
     add_experiment_routes(router, get_session)
     add_workbench_routes(router, get_session)
+    add_repeat_routes(router, get_session)
+    add_review_routes(router, get_session)
+    add_analysis_routes(router, get_session)
     app.include_router(router)
     return app
 

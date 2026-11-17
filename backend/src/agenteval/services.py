@@ -49,11 +49,16 @@ def dataset_view(session: Session, row):
     return sanitize(result, known_secrets())
 
 
-CASE_FIELDS = "case_key question expected_answer expected_tools tool_match_mode required_metrics tags enabled preconditions source license seen_regression"
+CASE_FIELDS = "case_key question expected_answer expected_tools tool_match_mode tool_assertions required_metrics tags enabled preconditions source license seen_regression"
 
 
 def case_content(row):
-    return public_row(row, CASE_FIELDS)
+    result = public_row(row, CASE_FIELDS)
+    assertions = result.get("tool_assertions") or {}
+    # 未配置时沿用旧快照内容，避免仅因新增空字段使旧基线不可比。
+    if not assertions.get("sequence") and not assertions.get("max_calls"):
+        result.pop("tool_assertions", None)
+    return result
 
 
 def case_view(row):

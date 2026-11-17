@@ -24,7 +24,7 @@ flowchart TD
     Report --> API
 ```
 
-后端通过 SQLAlchemy 和 Alembic 管理独立 MySQL schema。前端使用 Vue 3、TypeScript、Element Plus、Vue Router 和 ECharts，包含 Dashboard、数据集、Agent 配置、实验、评测详情、Badcase 和报告七个页面。
+后端通过 SQLAlchemy 和 Alembic 管理独立 MySQL schema。前端使用 Vue 3、TypeScript、Element Plus、Vue Router 和 ECharts，包含 Dashboard、数据集、Agent 配置、实验、评测详情、Badcase、报告及质量工作台。
 
 本机运行采用单进程和一个活动任务槽，没有引入 Redis、消息队列或分布式任务平台。访问方式见 [本机运行](quickstart.md)。
 
@@ -39,8 +39,13 @@ flowchart TD
 | CaseRun | 某次运行中一道题的回答、观测、用量与状态 | 与该运行的冻结用例一一关联 |
 | ScoreSet | ORIGINAL 或 RESCORE 的 Judge、规则快照和状态 | 同一执行可保留多个评分口径 |
 | EvaluationScore / CaseEvaluation | 指标结果、理由与逐题总判定 | 按评分集保存，不覆盖旧结论 |
+| HumanReview | 人工结论、可选指标分、理由及本机填报身份 | 追加记录，不替代 Judge；一致性取每题最新记录 |
+| RegressionDraft | 冻结来源用例、新参考行为和审核记录 | 显式审批创建禁用新用例，原运行保留 |
+| RepeatBatch / RepeatMember | 冻结来源、合计预算及独立运行关系 | 共用活动槽、顺序执行，中断不自动续跑 |
 
 快照以规范化 JSON 计算 SHA-256，保存启用用例、配置、规则、Judge、预算和组件版本。历史保护由应用模型及数据库外键约束实现，数据库管理员仍有直接写入权限，项目不提供防篡改账本。
+
+扩展分析入口统一位于 `/api/v1/extensions`。回归检查、稳定性分析和 JSON / CSV / HTML 导出只读保存事实；人工复核与候选用例写入独立表。可选工具断言仅在配置后生成新指标，未配置用例保留旧内容指纹。接口与用户流程见[评测闭环扩展](evaluation-extensions.md)。
 
 ## 一次运行如何完成
 

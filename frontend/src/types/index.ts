@@ -2,9 +2,10 @@ export interface Page<T> { items: T[]; total: number; page: number; page_size: n
 export interface Dataset { id: number; name: string; description: string; revision: number; enabled_cases: number; created_at: string; updated_at: string }
 export interface DatasetInput { name: string; description: string }
 export interface Preconditions { device_ref: string | null; order_id: number | null; prior_turns: string[] }
+export interface ToolAssertions { sequence?: string[]; max_calls?: Record<string, number> }
 export interface CaseInput {
   case_key: string; question: string; expected_answer: string; expected_tools: string[] | null;
-  tool_match_mode: 'contains' | 'exact'; required_metrics: string[]; tags: string[]; enabled: boolean;
+  tool_match_mode: 'contains' | 'exact'; tool_assertions?: ToolAssertions; required_metrics: string[]; tags: string[]; enabled: boolean;
   preconditions: Preconditions; source: Record<string, unknown>; license: string; seen_regression: boolean;
 }
 export interface TestCase extends CaseInput { id: number; dataset_id: number; revision: number; created_at: string; updated_at: string }

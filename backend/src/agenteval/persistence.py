@@ -86,6 +86,7 @@ class TestCase(Timestamps, SoftDelete, Base):
     expected_answer: Mapped[str] = mapped_column(Text)
     expected_tools: Mapped[list[str] | None] = mapped_column(JSON, nullable=True)
     tool_match_mode: Mapped[str] = mapped_column(String(16), default="contains")
+    tool_assertions: Mapped[dict[str, Any] | None] = mapped_column(JSON, default=dict, nullable=True)
     required_metrics: Mapped[list[str]] = mapped_column(JSON, default=list)
     tags: Mapped[list[str]] = mapped_column(JSON, default=list)
     enabled: Mapped[bool] = mapped_column(Boolean, default=True)
@@ -294,3 +295,6 @@ for _model in _IMMUTABLE:
 for _model, _attributes in ((EvaluationRun, ("snapshot",)), (CaseRun, ("case_snapshot",)), (ScoreSet, ("judge_snapshot", "rule_snapshot"))):
     for _attribute in _attributes:
         event.listen(getattr(_model, _attribute), "set", lambda target, value, oldvalue, initiator: freeze_json(value), retval=True)
+
+# 统一注册新增领域表，Base.metadata 与迁移测试看到同一份模型。
+from . import review_models, repeat_models  # noqa: E402,F401

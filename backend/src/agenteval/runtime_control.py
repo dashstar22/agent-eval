@@ -154,6 +154,8 @@ def recover_orphans(session_factory, owner_instance, ensure_owner):
             for case in session.scalars(select(CaseRun).where(CaseRun.run_id.in_(interrupted_runs), CaseRun.phase != "EVALUATED")):
                 # 已取得的回答/观测和单次Judge记录不被改写。
                 case.phase = "INTERRUPTED"
+            from .repeat_runs import recover_repeat_batches
+            recover_repeat_batches(session, owner_instance)
             slot.active_job_type = slot.active_job_id = slot.owner_instance = None
             ensure_owner()
         return {"runs": len(runs), "score_sets": len(score_sets)}
@@ -300,6 +302,12 @@ class RuntimeManager:
                 if rescore_id:
                     from .rescore_worker import finish_rescore
                     finish_rescore(self.session_factory, rescore_id, self.owner_instance, "INTERRUPTED")
+                with self.session_factory() as session:
+                    slot = session.get(RuntimeControl, 1)
+                    repeat_id = slot.active_job_id if slot and slot.owner_instance == self.owner_instance and slot.active_job_type == "REPEAT" else None
+                if repeat_id:
+                    from .repeat_runs import finish_repeat
+                    finish_repeat(self.session_factory, repeat_id, self.owner_instance, "INTERRUPTED", "APPLICATION_SHUTDOWN")
         finally:
             self.started = False
             self.lease.release()

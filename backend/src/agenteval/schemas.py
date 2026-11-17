@@ -11,12 +11,24 @@ Text = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max
 Question = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=20000)]
 Reference = Annotated[str, StringConstraints(pattern=r"^[A-Za-z_][A-Za-z0-9_]{0,127}$")]
 METRICS = {"execution_completed", "answer_nonempty", "correctness", "relevance", "task_completion",
-           "faithfulness", "expected_tools", "tool_success", "response_time", "tool_names"}
+           "faithfulness", "expected_tools", "tool_success", "response_time", "tool_names", "tool_order", "tool_call_count"}
 DEFAULT_REQUIRED = ["execution_completed", "answer_nonempty", "correctness", "relevance", "task_completion"]
 
 
 class Input(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
+
+
+class ToolAssertions(Input):
+    sequence: list[Text] | None = Field(default=None, min_length=1, max_length=30)
+    max_calls: dict[Text, Annotated[int, Field(ge=0, le=1000)]] = Field(default_factory=dict, max_length=100)
+
+    @field_validator("sequence")
+    @classmethod
+    def unique_sequence(cls, value):
+        if value is not None and len(value) != len(set(value)):
+            raise ValueError("工具顺序不能包含重复名称；比较各工具首次出现顺序")
+        return value
 
 
 class DatasetCreate(Input):
@@ -41,6 +53,7 @@ class CaseCreate(Input):
     expected_answer: Question
     expected_tools: list[Text] | None = Field(default=None, max_length=100)
     tool_match_mode: Literal["contains", "exact"] = "contains"
+    tool_assertions: ToolAssertions = Field(default_factory=ToolAssertions)
     required_metrics: list[str] = Field(default_factory=lambda: DEFAULT_REQUIRED.copy(), max_length=20)
     tags: list[Text] = Field(default_factory=list, max_length=50)
     enabled: bool = True
@@ -55,6 +68,10 @@ class CaseCreate(Input):
             raise ValueError("expected_tools 为空列表时须使用 exact；不检查请用 null")
         if not self.required_metrics or not set(self.required_metrics) <= METRICS:
             raise ValueError("required_metrics 须包含至少一个已知指标")
+        if "tool_order" in self.required_metrics and not self.tool_assertions.sequence:
+            raise ValueError("必评工具顺序须配置 sequence")
+        if "tool_call_count" in self.required_metrics and not self.tool_assertions.max_calls:
+            raise ValueError("必评工具次数须配置 max_calls")
         for values in (self.expected_tools or [], self.tags, self.required_metrics):
             if len(set(values)) != len(values):
                 raise ValueError("工具、标签及指标不能重复")
@@ -66,6 +83,7 @@ class CasePatch(Input):
     expected_answer: Question | None = None
     expected_tools: list[Text] | None = Field(default=None, max_length=100)
     tool_match_mode: Literal["contains", "exact"] | None = None
+    tool_assertions: ToolAssertions | None = None
     required_metrics: list[str] | None = None
     tags: list[Text] | None = None
     enabled: bool | None = None

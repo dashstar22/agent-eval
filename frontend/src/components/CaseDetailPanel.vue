@@ -90,6 +90,7 @@ onBeforeUnmount(() => { disposed = true; generation++; saveSequence++ })
           <label class="case-score-picker">评分集<select :value="detail.score_set.id" :disabled="saving" @change="emit('scoreChange', ($event.target as HTMLSelectElement).value)"><option v-for="item in detail.score_sets" :key="item.id" :value="item.id">{{ item.kind }} · {{ item.status }} · {{ item.id.slice(0, 8) }}</option></select></label>
         </div>
         <div class="case-state-axes"><span>执行 <StatusBadge :value="detail.case.agent_status" domain="execution" /></span><span>评分 <StatusBadge :value="detail.scoring.evaluation?.status" domain="scoring" /></span><span>阶段 <span class="mono">{{ detail.case.phase }}</span></span></div>
+        <div class="case-quality-actions"><RouterLink class="text-link" :to="{ path: '/quality', query: { tab: 'reviews', run_id: detail.case.run_id, score_set_id: detail.score_set.id, case_run_id: detail.case.id } }">进入结构化人工复核 →</RouterLink><RouterLink class="text-link" :to="{ path: '/quality', query: { tab: 'drafts', run_id: detail.case.run_id, score_set_id: detail.score_set.id, case_run_id: detail.case.id } }">转为待审回归候选 →</RouterLink><span class="small muted">当前详情已展示评分；需要独立盲审时，从质量工作台选择未查看的用例。</span></div>
         <div v-if="detail.automatic_tags.length || detail.evaluation_issues.length" class="tag-list"><ElTag v-for="tag in detail.automatic_tags" :key="tag" type="danger" size="small">{{ categoryNames[tag] || tag }}</ElTag><ElTag v-for="item in detail.evaluation_issues" :key="item" type="warning" size="small">评测异常：{{ item }}</ElTag></div>
 
         <section v-if="attentionMetrics.length || quality !== 'PASS'" class="case-verdict" :class="{ 'case-verdict--warning': quality !== 'FAIL' }">
@@ -169,6 +170,7 @@ onBeforeUnmount(() => { disposed = true; generation++; saveSequence++ })
 .case-score-picker select { min-height: var(--control-height); font-size: var(--text-xs); max-width: 260px; width: 100%; }
 .case-state-axes { display: flex; gap: var(--space-3) var(--space-5); flex-wrap: wrap; font-size: var(--text-xs); color: var(--muted); }
 .case-state-axes > span { display: flex; align-items: center; gap: var(--space-2); }
+.case-quality-actions { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); align-items: center; font-size: var(--text-sm); }
 .case-verdict { padding: var(--space-4); border-left: 3px solid var(--danger); background: var(--danger-soft); border-radius: 0 var(--radius-control) var(--radius-control) 0; display: grid; gap: var(--space-4); }
 .case-verdict > h3 { color: var(--danger); margin: 0; font-size: var(--text-md); }
 .case-verdict--warning { border-left-color: var(--warning); background: var(--warning-soft); }

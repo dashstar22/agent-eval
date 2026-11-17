@@ -5,7 +5,7 @@ from typing import Any
 
 from .evaluation_models import CaseAssessment, JudgeResult, MetricResult
 from .models import ExecutionResult
-from .schemas import DEFAULT_REQUIRED, METRICS, RuleProfile
+from .schemas import DEFAULT_REQUIRED, METRICS, RuleProfile, ToolAssertions
 
 RULE_METRICS = ("execution_completed", "answer_nonempty", "expected_tools", "tool_success", "response_time", "tool_names")
 QUALITY_METRICS = ("correctness", "relevance", "task_completion", "faithfulness")
@@ -15,6 +15,8 @@ RULE_DEPENDENCIES = {
     "tool_success": ["tools", "tools_completeness", "tool_sources", "tool_status_mapping"],
     "response_time": ["agent_status", "duration_ms", "response_time_ms"],
     "tool_names": ["expected_tools", "tool_match_mode", "tools", "tools_completeness", "tool_sources"],
+    "tool_order": ["tool_assertions.sequence", "tools", "tools_completeness", "tool_sources"],
+    "tool_call_count": ["tool_assertions.max_calls", "tools", "tools_completeness", "tool_sources"],
 }
 TOOL_STATUS_VERSION = "agenteval-tool-status-v1"
 NORMAL_STATUSES = frozenset({"ORDER_FOUND", "HIT", "NO_EVIDENCE", "SUCCEEDED", "SUCCESS", "COMPLETED", "ORDER_NOT_FOUND", "TICKET_CREATED", "DRAFT_CREATED"})
@@ -92,7 +94,7 @@ def evaluate_rules(case_snapshot: Mapping[str, Any], execution: ExecutionResult 
         return MetricResult(metric=name, status=status, required=name in required, reason=reason, evidence=base | {"dependencies": RULE_DEPENDENCIES[name]} | (evidence or {}))
 
     if execution is None:
-        return [metric(name, "NA", "AGENT_NOT_EXECUTED", {"answer_available": False, "context_scope": "UNAVAILABLE", "context_completeness": "UNAVAILABLE", "context_count": 0}) for name in RULE_METRICS]
+        return [metric(name, "NA", "AGENT_NOT_EXECUTED", {"answer_available": False, "context_scope": "UNAVAILABLE", "context_completeness": "UNAVAILABLE", "context_count": 0}) for name in RULE_METRICS] + evaluate_tool_assertions(case_snapshot, execution, profile)
     facts = {
         "agent_status": execution.agent_status, "execution_id": execution.execution_id,
         "source_type": execution.source_type, "answer_available": execution.answer is not None,
@@ -142,6 +144,46 @@ def evaluate_rules(case_snapshot: Mapping[str, Any], execution: ExecutionResult 
     time_status = "NA" if execution.agent_status != "SUCCEEDED" else ("PASS" if execution.duration_ms <= profile.response_time_ms else "FAIL")
     results.append(metric("response_time", time_status, "AGENT_NOT_SUCCEEDED" if time_status == "NA" else "RESPONSE_WITHIN_THRESHOLD" if time_status == "PASS" else "RESPONSE_EXCEEDS_THRESHOLD", {"actual_ms": execution.duration_ms, "threshold_ms": profile.response_time_ms}))
     results.append(metric("tool_names", names_status, names_reason, tool_evidence | {"match_mode": mode}))
+    return results + evaluate_tool_assertions(case_snapshot, execution, profile)
+
+
+def evaluate_tool_assertions(case_snapshot, execution, profile):
+    """仅评价明确配置的断言；旧快照不追加指标或改变原结论。"""
+    config = ToolAssertions.model_validate(dict(case_snapshot.get("tool_assertions") or {}))
+    required = required_metrics(case_snapshot)
+    if not config.sequence and not config.max_calls:
+        return []
+    events = [] if execution is None or execution.tools is None else [
+        event for event in execution.tools if event.kind == "TOOL" and event.source in profile.tool_sources
+    ]
+    complete = execution is not None and execution.tools is not None and execution.tools_completeness == "COMPLETE" and not any(
+        event.kind == "TOOL" and event.source == "UNKNOWN" for event in execution.tools
+    )
+    evidence = {
+        "rule_version": profile.version, "assertion_version": "agenteval-tool-assertions-v1",
+        "sources": profile.tool_sources, "trajectory_complete": complete,
+        "events": [{"event_id": event.event_id, "sequence": event.sequence, "name": event.name} for event in events],
+    }
+    results = []
+    if config.sequence:
+        first = {}
+        for event in events:
+            first.setdefault(event.name, event.sequence)
+        positions = [first.get(name) for name in config.sequence]
+        passed = all(value is not None for value in positions) and positions == sorted(positions)
+        status = "NA" if not complete else "PASS" if passed else "FAIL"
+        results.append(MetricResult(metric="tool_order", status=status, required="tool_order" in required,
+            reason="TOOL_TRAJECTORY_INCOMPLETE" if not complete else "TOOL_FIRST_OCCURRENCE_ORDER_MATCH" if passed else "TOOL_FIRST_OCCURRENCE_ORDER_MISMATCH",
+            evidence=evidence | {"dependencies": RULE_DEPENDENCIES["tool_order"], "expected_sequence": config.sequence,
+                                 "first_positions": first, "semantics": "FIRST_OCCURRENCE_ORDER_ALL_REQUIRED"}))
+    if config.max_calls:
+        counts = {name: sum(event.name == name for event in events) for name in config.max_calls}
+        exceeded = [name for name, limit in config.max_calls.items() if counts[name] > limit]
+        status = "NA" if not complete else "FAIL" if exceeded else "PASS"
+        results.append(MetricResult(metric="tool_call_count", status=status, required="tool_call_count" in required,
+            reason="TOOL_TRAJECTORY_INCOMPLETE" if not complete else "TOOL_CALL_LIMIT_EXCEEDED" if exceeded else "TOOL_CALL_LIMITS_MET",
+            evidence=evidence | {"dependencies": RULE_DEPENDENCIES["tool_call_count"], "limits": config.max_calls,
+                                 "actual_counts": counts, "exceeded": exceeded}))
     return results
 
 

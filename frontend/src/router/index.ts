@@ -8,6 +8,7 @@ export const navigation = [
   { path: '/evaluations', title: '评测详情', caption: '执行与评分事实', symbol: '≡', pending: false },
   { path: '/badcases', title: 'Badcase', caption: '失败与人工复核', symbol: '⚑', pending: false },
   { path: '/reports', title: '报告', caption: '指标与证据范围', symbol: '▥', pending: false },
+  { path: '/quality', title: '质量工作台', caption: '复核、回归与稳定性', symbol: '✓', pending: false },
 ]
 export default createRouter({ history: createWebHistory(), routes: [
   { path: '/', redirect: '/dashboard' },
@@ -18,5 +19,6 @@ export default createRouter({ history: createWebHistory(), routes: [
   { path: '/evaluations', component: () => import('../views/EvaluationsView.vue') },
   { path: '/badcases', component: () => import('../views/EvaluationsView.vue'), props: { badcases: true } },
   { path: '/reports', component: () => import('../views/ReportsView.vue') },
+  { path: '/quality', component: () => import('../views/QualityView.vue') },
   { path: '/:pathMatch(.*)*', redirect: '/datasets' },
 ] })
