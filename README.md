@@ -41,18 +41,18 @@ AgentEval 是一个可在本机运行的 Agent 评测项目，将“准备测试
 以下图片来自工作台实际运行并保存的评测结果。点击预览可查看完整原图；低分、超时和模型证据缺失均按实际记录展示。
 
 <p align="center">
-  <a href="docs/images/report-full.png"><img src="docs/images/report-overview.jpg" width="960" alt="A配置终态报告：30题、25通过、5失败，并显示版本核验和用量范围" /></a>
+  <a href="docs/images/frontend-report-20261117.png"><img src="docs/images/frontend-report-20261117.png" width="960" alt="改版后的A配置报告：30题、25通过、5失败，突出失败入口并保留有效通过率、可判定覆盖率和核验范围" /></a>
   <br />
-  <sub>评测报告 · 通过率、有效样本和版本证据一起查看</sub>
+  <sub>评测报告 · 先看质量结果，再进入失败用例核对证据</sub>
 </p>
 
 <table>
-  <tr><th width="50%">配置比较与报告图表</th><th width="50%">执行失败与证据详情</th></tr>
+  <tr><th width="50%">配置比较与报告图表（历史界面）</th><th width="50%">失败指标与已保存理由</th></tr>
   <tr>
     <td><a href="docs/images/report-full.png"><img src="docs/images/report-charts.jpg" width="100%" alt="共同有效配对、指标差值、Badcase分类和耗时分布" /></a></td>
-    <td><a href="docs/images/execution-failure-full.png"><img src="docs/images/execution-failure.jpg" width="100%" alt="D22模型超时的原回答、工具结果及实际上下文" /></a></td>
+    <td><a href="docs/images/frontend-detail-20261117.png"><img src="docs/images/frontend-detail-20261117.png" width="100%" alt="改版后的D04详情：前置正确性、依据充分性与相关性等失败指标及已保存的Judge理由" /></a></td>
   </tr>
-  <tr><td align="center">从统计进入具体用例，核对参与比较的样本</td><td align="center">保留真实超时和已保存事实，继续定位失败原因</td></tr>
+  <tr><td align="center">从统计进入具体用例，核对参与比较的样本</td><td align="center">前置失败指标与已保存理由，继续核对回答、工具和评分证据</td></tr>
 </table>
 
 <details>
@@ -133,7 +133,9 @@ npm run dev
 
 一个可追查的案例是 D04：工具已经命中相关资料，观测也记录了完整实际上下文，但最终回答仍称依据未确认。工作台保留原回答、工具结果和 Judge 低分，便于沿证据继续定位原因。
 
-2026-11-17 公开源码副本验证：后端 **285 项测试通过、1 项因外部原始资料包缺失而跳过**，前端类型检查和构建通过。此前的工作台运行记录另有 50 项页面功能检查通过。前端报告页存在约 518 kB 的构建包体警告。数据来源、分母、评分规则、用量覆盖及结果局限见 [评测方法与记录](docs/evaluation.md)。
+2026-11-17 公开源码副本验证：后端 **285 项测试通过、1 项因外部原始资料包缺失而跳过**，前端类型检查和构建通过。此前的工作台运行记录另有 50 项页面功能检查通过。上述后端测试是既有验证记录，未在本轮前端改版中重跑。数据来源、分母、评分规则、用量覆盖及结果局限见 [评测方法与记录](docs/evaluation.md)。
+
+本轮前端改版的类型检查、构建和依赖许可检查通过，完成 **41 项浏览器交互断言、17 项隔离 MySQL/HTTP 断言**，并以实际视口宽度核对 320px/390px 报告与详情无整页横向溢出。验证复用历史保存结果及隔离合成夹具，Agent 与 Judge 请求均为 **0**，不构成新的模型质量测试。当前报告分块仍有约 **523 kB** 的构建体积提示；完整范围和证据见 [前端改版与验证](docs/frontend-redesign.md)。
 
 本地检查入口：
 
