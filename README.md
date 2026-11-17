@@ -40,7 +40,7 @@ AgentEval 是一个可在本机运行的 Agent 评测项目，将“准备测试
 
 以下图片于 **2026-11-18** 从当前界面重新截取。报告与 D11 详情读取 **2026-11-17 已保存的真实单配置补测**：30 题中 **26 通过、4 失败、0 未判定**。质量工作台读取同日合成夹具的已保存复核与一致性记录，不代表独立人工质量标注。本次没有新增 Agent 或 Judge 调用，也没有提交新的人工复核。
 
-README 内展示页面顶部的缩小预览；**点击预览图或下方文字链接，可查看从页头到页脚的完整长图**。三张完整图均核对了顶部、底部、表格所有列与末行；原始 JSON 仍保持折叠。截图范围、尺寸与文件哈希见[完整长图回执](docs/evidence/readme-fullpages-20261118.json)。
+README 内展示页面重点预览，其中 D11 使用原问题、参考行为和实际回答的横向局部图；**点击预览图或下方文字链接，可查看从页头到页脚的完整长图**。三张完整图均核对了顶部、底部、表格所有列与末行；原始 JSON 仍保持折叠。完整图的范围、尺寸与文件哈希见[完整长图回执](docs/evidence/readme-fullpages-20261118.json)，D11 预览的裁切范围见[横向预览回执](docs/evidence/readme-d11-preview-20261118.json)。
 
 <p align="center">
   <a href="docs/images/real-e2e-report-full-20261118.png"><img src="docs/images/real-e2e-report-preview-20261118.jpg" width="960" alt="真实补测报告顶部预览：26通过、4失败、0未判定；点击查看含图表、用量、完整版本表和页脚的长图" /></a>
@@ -49,7 +49,7 @@ README 内展示页面顶部的缩小预览；**点击预览图或下方文字�
 </p>
 
 <p align="center">
-  <a href="docs/images/real-e2e-detail-full-20261118.png"><img src="docs/images/real-e2e-detail-preview-20261118.jpg" width="960" alt="D11失败详情顶部预览：实际回答、冻结参考行为与失败理由；点击查看全部10行指标、工具轨迹、4行版本表和页脚" /></a>
+  <a href="docs/images/real-e2e-detail-full-20261118.png"><img src="docs/images/real-e2e-detail-focus-preview-20261118.jpg" width="960" alt="D11横向重点预览：原问题询问演示保修期，冻结参考行为明确为购买日起180天，实际回答却称依据未能确认；点击查看完整详情长图" /></a>
   <br />
   <sub>D11 · 已检索到演示保修期仍未回答；原 Judge 分数为 2 / 1 / 3 / 2 · <a href="docs/images/real-e2e-detail-full-20261118.png">查看完整详情长图（1800 × 5423）</a></sub>
 </p>

@@ -1,0 +1,97 @@
+{
+  "status": "PASS",
+  "scope": "README_D11_FOCUSED_PREVIEW_ONLY",
+  "generated_at": "2026-11-17T16:34:11.397352+00:00",
+  "local_date": "2026-11-18",
+  "timezone": "Asia/Shanghai",
+  "source_commit": "16125f7f09a207bd258ad4d53bdd19291e5fbc9b",
+  "ui_source_commit": "ab7592be5d1b9ad3ca9ca7a8a5549a12df6716ed",
+  "source_saved_result_date": "2026-11-17",
+  "source_screenshot_date": "2026-11-18",
+  "run_id": "39ff235d-d797-4025-879e-923ff045dd50",
+  "score_set_id": "075e48b3-b0d8-4ced-8ef1-92f3859f9ff9",
+  "case_key": "D11",
+  "case_run_id": "db47b89b-166a-42c3-a1cb-e3b28aa146ba",
+  "source": {
+    "path": "docs/images/real-e2e-detail-full-20261118.png",
+    "width": 1800,
+    "height": 5423,
+    "sha256": "43983adbedaeb155d00e3d01d723a49cd3401a4e958e43d89bf06a22bd47c0a0"
+  },
+  "preview": {
+    "path": "docs/images/real-e2e-detail-focus-preview-20261118.jpg",
+    "width": 1029,
+    "height": 330,
+    "bytes": 96580,
+    "sha256": "caa9edc689ec617e0e89f3e5de4c8e07a295679fc650d0be1671aa3dacd0d0a3"
+  },
+  "transform": {
+    "source_crop_css": [
+      708,
+      1636,
+      1737,
+      1966
+    ],
+    "method": "ONE_CONTIGUOUS_RECTANGLE_FROM_SAVED_FULL_IMAGE",
+    "landmark": "case-reading-grid",
+    "landmark_bbox": {
+      "class": "case-reading-grid",
+      "x": 720.1723022460938,
+      "y": 1648.37744140625,
+      "width": 1004.597412109375,
+      "height": 305.1181945800781,
+      "right": 1724.7697143554688,
+      "bottom": 1953.4956359863281
+    },
+    "padding_css_px": 12,
+    "resize": false,
+    "jpeg_quality": 94,
+    "jpeg_optimize": true,
+    "jpeg_subsampling": 0,
+    "stitching": false,
+    "content_redrawn": false
+  },
+  "displayed_content": [
+    "D11 原问题",
+    "冻结参考行为",
+    "Agent 实际回答"
+  ],
+  "expected_readable_content": [
+    "合成订单上的 PRINT-DEMO-01 演示保修期是多少",
+    "本合成演示保修期自购买日起180天",
+    "这次回复的依据未能确认"
+  ],
+  "readme_full_image_href": "docs/images/real-e2e-detail-full-20261118.png",
+  "previous_fullpage_receipt": "docs/evidence/readme-fullpages-20261118.json",
+  "preservation": {
+    "all_existing_images_unchanged": true,
+    "all_existing_evidence_unchanged": true,
+    "complete_d11_image_link_preserved": true
+  },
+  "new_agent_calls": 0,
+  "new_judge_calls": 0,
+  "new_reviews": 0,
+  "browser_started": false,
+  "database_connections": 0,
+  "limits": [
+    "This is a focused preview of the question, frozen reference behavior, and saved answer. Full Judge metrics, tools, version tables and footer remain in the linked complete image.",
+    "This reuses saved real-run evidence and is not a new model evaluation."
+  ],
+  "verification": {
+    "primary_visual_review": "PASS",
+    "independent_visual_review": "PASS",
+    "question_reference_answer_complete": true,
+    "source_crop_reencoded_byte_identical": true,
+    "readme_preview_to_original_full_link": "PASS",
+    "readme_local_link_occurrences": 36,
+    "broken_local_links": 0,
+    "protected_existing_files": 31,
+    "protected_existing_files_changed": 0,
+    "changed_files_count": 3,
+    "available_secret_sources_scanned": 13,
+    "credential_value_hits": 0,
+    "credential_pattern_hits": 0,
+    "git_diff_check": "PASS",
+    "private_independent_audit_sha256": "2caf4691f7de9cf6d06a2c991474499c3ee50d4616a867b1e72a48260bdcd487"
+  }
+}
