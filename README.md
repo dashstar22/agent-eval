@@ -38,25 +38,27 @@ AgentEval 是一个可在本机运行的 Agent 评测项目，将“准备测试
 
 ## 运行截图
 
-以下图片展示 2026-11-16 历史 A/B 评测记录，其中报告与详情截图使用 11 月 17 日改版后的界面。点击预览可查看完整原图；低分、超时和模型证据缺失均按实际记录展示。下文的 11 月 17 日真实补测另有报告与逐题证据，本节图片仍对应历史批次。
+报告与 D11 详情来自 **2026-11-17 已保存的真实单配置补测**，使用包含质量工作台的当前界面展示：30 题中 **26 通过、4 失败、0 未判定**。质量工作台图片来自同日合成夹具的自动化界面验证，展示结构化复核与原 Judge 对照，不代表独立人工质量标注。点击图片可查看原图；截图来源与裁剪范围见[截图回执](docs/evidence/readme-screenshots-20261117.json)。
 
 <p align="center">
-  <a href="docs/images/frontend-report-20261117.png"><img src="docs/images/frontend-report-20261117.png" width="960" alt="改版后的A配置报告：30题、25通过、5失败，突出失败入口并保留有效通过率、可判定覆盖率和核验范围" /></a>
+  <a href="docs/images/real-e2e-report-20261117.png"><img src="docs/images/real-e2e-report-20261117.png" width="960" alt="11月17日真实单配置补测报告：30题、26通过、4失败、0未判定，有效通过率86.7%，保留INCOMPLETE版本核验提示及质量工作台入口" /></a>
   <br />
-  <sub>评测报告 · 先看质量结果，再进入失败用例核对证据</sub>
+  <sub>本轮真实补测报告 · 26 / 4 / 0；成功模型元数据覆盖 29/30，真实 Judge 评分 30/30</sub>
 </p>
 
 <table>
-  <tr><th width="50%">配置比较与报告图表（历史界面）</th><th width="50%">失败指标与已保存理由</th></tr>
+  <tr><th width="50%">D11：实际回答与失败理由（真实补测）</th><th width="50%">质量工作台：结构化复核与 Judge 对照</th></tr>
   <tr>
-    <td><a href="docs/images/report-full.png"><img src="docs/images/report-charts.jpg" width="100%" alt="共同有效配对、指标差值、Badcase分类和耗时分布" /></a></td>
-    <td><a href="docs/images/frontend-detail-20261117.png"><img src="docs/images/frontend-detail-20261117.png" width="100%" alt="改版后的D04详情：前置正确性、依据充分性与相关性等失败指标及已保存的Judge理由" /></a></td>
+    <td><a href="docs/images/real-e2e-detail-20261117.png"><img src="docs/images/real-e2e-detail-20261117.png" width="100%" alt="本轮D11失败详情：正确性2分、依据充分性1分、相关性3分、任务完成度2分，保留实际回答和冻结参考行为" /></a></td>
+    <td><a href="docs/images/quality-workbench-20261117.png"><img src="docs/images/quality-workbench-20261117.png" width="100%" alt="质量工作台合成界面验证：保存结构化复核，保留原Judge评分和历史；画面明确标注自动化界面验证而非真实人工质量评审" /></a></td>
   </tr>
-  <tr><td align="center">从统计进入具体用例，核对参与比较的样本</td><td align="center">前置失败指标与已保存理由，继续核对回答、工具和评分证据</td></tr>
+  <tr><td align="center">已检索到演示保修期仍未回答，实际失败与 Judge 理由完整保留</td><td align="center">合成夹具验证复核流程；人工记录与原 Judge 分别保存</td></tr>
 </table>
 
 <details>
-  <summary>查看无模型请求分支</summary>
+  <summary>查看历史 A/B 配置比较与无模型请求分支</summary>
+  <p>以下图片对应 2026-11-16 历史 A/B，包含共同有效样本、指标差值与 H08 确定性追问，未替换为本轮单配置结果。</p>
+  <p align="center"><a href="docs/images/report-full.png"><img src="docs/images/report-charts.jpg" width="960" alt="历史A/B配置比较：共同有效配对、指标差值、Badcase分类和耗时分布" /></a></p>
   <p align="center"><a href="docs/images/no-model-branch-full.png"><img src="docs/images/no-model-branch.jpg" width="960" alt="H08未请求模型的确定性追问，模型版本明确显示未核验" /></a></p>
 </details>
 
@@ -131,7 +133,7 @@ npm ci --ignore-scripts
 npm run dev
 ```
 
-打开 [本机工作台](http://127.0.0.1:15173)；后端交互式 API 文档为 [Swagger UI](http://127.0.0.1:18080/docs)。初始化会导入 30 条合成用例。新数据库的历史报告为空，截图来自下文所述的历史真实评测。
+打开 [本机工作台](http://127.0.0.1:15173)；后端交互式 API 文档为 [Swagger UI](http://127.0.0.1:18080/docs)。初始化会导入 30 条合成用例。新数据库的历史报告为空；截图使用已保存的真实评测结果与明确标注的合成界面验证数据。
 
 **无需模型密钥**即可维护数据和配置、运行本地测试，并使用 Mock Agent 检查执行链路。Mock 不生成真实 AI 回答；没有有效 Judge 配置时，相关质量项会显示评分错误或未判定。
 

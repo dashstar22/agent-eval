@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-17",
+  "timezone": "Asia/Shanghai",
+  "status": "SCREENSHOTS_CAPTURED_AND_VISUALLY_REVIEWED",
+  "frontend_commit": "fc97c6721792216a2ea78cc20896cfa97b9393d7",
+  "report_and_detail": {
+    "run_id": "39ff235d-d797-4025-879e-923ff045dd50",
+    "score_set_id": "075e48b3-b0d8-4ced-8ef1-92f3859f9ff9",
+    "case_run_id": "db47b89b-166a-42c3-a1cb-e3b28aa146ba",
+    "case_key": "D11",
+    "quality": {
+      "pass": 26,
+      "fail": 4,
+      "undetermined": 0
+    },
+    "agent_successful_model_metadata_coverage": "29/30",
+    "judge_succeeded": "30/30",
+    "version_verification": "INCOMPLETE",
+    "source_export_sha256": "d49474385a567b35bd37b83f78322769c3ebcd65c795afb1ae8c5281e1a95d89",
+    "capture": "Actual application UI in ego-browser, built from the extension commit; report viewport and detail full-page screenshot were cropped without repainting content.",
+    "backend": "Saved core run records served by a dedicated runtime-disabled backend with GET/HEAD/OPTIONS-only middleware and MySQL READ ONLY transactions. New extension endpoints were not exercised during this capture."
+  },
+  "quality_workbench": {
+    "source_image": "docs/images/quality-review-20261117.png",
+    "source_sha256": "c837c6933b497d8846858fb5cc91877c254b00a91c08bc2cefe932675bf52e89",
+    "source_evidence": "docs/evidence/evaluation-extensions-20261117.json",
+    "data": "Synthetic saved facts and protocol substitutes; review fields were filled by UI automation. Not independent human quality annotation or real-model stability evidence.",
+    "transformation": "Crop away unused screenshot margins; original image and historical evidence remain unchanged."
+  },
+  "new_agent_calls": 0,
+  "new_judge_calls": 0,
+  "new_review_records": 0,
+  "checks": {
+    "frontend_typecheck": "PASS",
+    "frontend_build": "PASS",
+    "visual_review": "PASS",
+    "source_export_hash_unchanged": true,
+    "temporary_preview_ports_closed": true
+  },
+  "build_warning": "ReportsView bundle remains about 523 kB; no bundle optimization was included.",
+  "limitations": [
+    "This receipt verifies screenshot provenance and visible content only. Earlier full-suite test limitations remain as originally recorded.",
+    "The quality workbench image reuses the committed synthetic UI-validation screenshot; it is not a new real-model or human-review run."
+  ],
+  "images": [
+    {
+      "path": "docs/images/real-e2e-report-20261117.png",
+      "kind": "SAVED_REAL_RUN_REPORT",
+      "width": 1626,
+      "height": 873,
+      "bytes": 101645,
+      "sha256": "19fc042aec05bcb283800cea14850f68803e1027f2e8a4ac2e273bdeb3d76335",
+      "crop_box_left_top_right_bottom": [
+        0,
+        0,
+        1626,
+        873
+      ]
+    },
+    {
+      "path": "docs/images/real-e2e-detail-20261117.png",
+      "kind": "SAVED_REAL_RUN_D11_DETAIL",
+      "width": 930,
+      "height": 1505,
+      "bytes": 156054,
+      "sha256": "12deda42078f0a62f356793e759b40f71c039df989bb32c6f1695d210032237a",
+      "crop_box_left_top_right_bottom": [
+        646,
+        478,
+        1576,
+        1983
+      ]
+    },
+    {
+      "path": "docs/images/quality-workbench-20261117.png",
+      "kind": "SYNTHETIC_UI_REVIEW_FIXTURE",
+      "width": 1800,
+      "height": 1075,
+      "bytes": 83906,
+      "sha256": "948d1433c0331b0a940b929177f2942d17cef1b7673d95eee3664ad63de334aa",
+      "crop_box_left_top_right_bottom": [
+        0,
+        0,
+        1800,
+        1075
+      ]
+    }
+  ]
+}
